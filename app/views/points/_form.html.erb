@@ -1,0 +1,32 @@
+<%= form_with(model: point) do |form| %>
+  <% if point.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(point.errors.count, "error") %> prohibited this point from being saved:</h2>
+
+      <ul>
+        <% point.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :member_id%>
+    <%= form.select :member_id, Member.order(:first_name).map { |member| [member.first_name, member.id] }, include_blank: true, id: "id_of_the_member_id_select_box" %>
+  </div>
+
+  <div>
+    <%= form.label :point_category_id%>
+    <%= form.select :point_category_id, PointCategory.order(:name).map { |point_category| [point_category.name, point_category.id] }, include_blank: true, id: "id_of_the_point_category_id_select_box" %>
+  </div>
+
+  <div>
+    <%= form.label :is_approved, style: "display: block" %>
+    <%= form.check_box :is_approved %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
