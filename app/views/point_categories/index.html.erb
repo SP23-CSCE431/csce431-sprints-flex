@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Point categories</h1>
+
+<div id="point_categories">
+  <% @point_categories.each do |point_category| %>
+    <%= render point_category %>
+    <p>
+      <%= link_to "Show this point category", point_category %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New point category", new_point_category_path %>
