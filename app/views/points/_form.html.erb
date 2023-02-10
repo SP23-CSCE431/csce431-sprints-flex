@@ -12,13 +12,13 @@
   <% end %>
 
   <div>
-    <%= form.label :member_id, style: "display: block" %>
-    <%= form.text_field :member_id %>
+    <%= form.label :member_id%>
+    <%= form.select :member_id, Member.order(:first_name).map { |member| [member.first_name, member.id] }, include_blank: true, id: "id_of_the_member_id_select_box" %>
   </div>
 
   <div>
-    <%= form.label :point_category_id, style: "display: block" %>
-    <%= form.text_field :point_category_id %>
+    <%= form.label :point_category_id%>
+    <%= form.select :point_category_id, PointCategory.order(:name).map { |point_category| [point_category.name, point_category.id] }, include_blank: true, id: "id_of_the_point_category_id_select_box" %>
   </div>
 
   <div>
