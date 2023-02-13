@@ -1,0 +1,66 @@
+
+---
+ar_internal_metadata:
+  columns:
+  - key
+  - value
+  - created_at
+  - updated_at
+  records: 
+  - - environment
+    - development
+    - 2023-02-10 17:11:34.830472000 Z
+    - 2023-02-10 17:11:34.830472000 Z
+
+---
+members:
+  columns:
+  - id
+  - first_name
+  - last_name
+  - email
+  - phone
+  - role
+  - created_at
+  - updated_at
+  records: 
+  - - 1
+    - Test
+    - Test
+    - test@test.com
+    - 999-999-9999
+    - Test
+    - 2023-02-10 17:23:57.267185000 Z
+    - 2023-02-10 17:23:57.267185000 Z
+
+---
+point_categories:
+  columns:
+  - id
+  - name
+  - value
+  - created_at
+  - updated_at
+  records: 
+  - - 1
+    - Test Category
+    - 5
+    - 2023-02-10 17:24:17.788367000 Z
+    - 2023-02-10 17:24:30.890479000 Z
+
+---
+points:
+  columns:
+  - id
+  - member_id
+  - point_category_id
+  - is_approved
+  - created_at
+  - updated_at
+  records: 
+  - - 1
+    - 1
+    - 1
+    - false
+    - 2023-02-10 17:29:33.851343000 Z
+    - 2023-02-10 17:29:33.851343000 Z
