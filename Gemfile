@@ -74,3 +74,5 @@ group :test do
 end
 
 gem 'yaml_db'
+
+gem 'seed_dump'
