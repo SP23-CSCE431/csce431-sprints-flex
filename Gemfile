@@ -89,4 +89,3 @@ gem 'omniauth-google-oauth2'
 gem 'faker'
 
 gem 'brakeman'
-gem 'rubocop'
