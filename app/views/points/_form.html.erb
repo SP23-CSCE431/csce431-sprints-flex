@@ -13,7 +13,7 @@
 
   <div>
     <%= form.label :member_id%>
-    <%= form.select :member_id, Member.order(:first_name).map { |member| [member.first_name, member.id] }, include_blank: true, id: "id_of_the_member_id_select_box" %>
+    <%= form.select :admin_id, Admin.order(:full_name).map { |admin| [admin.full_name, admin.id] }, include_blank: true, id: "id_of_the_admin_id_select_box" %>
   </div>
 
   <div>

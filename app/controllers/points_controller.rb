@@ -65,6 +65,6 @@ class PointsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def point_params
-      params.require(:point).permit(:member_id, :point_category_id, :is_approved)
+      params.require(:point).permit(:admin_id, :point_category_id, :is_approved)
     end
 end
