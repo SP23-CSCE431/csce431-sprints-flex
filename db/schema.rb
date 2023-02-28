@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_25_084717) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_28_004646) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -49,10 +49,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_25_084717) do
     t.boolean "is_approved"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["member_id"], name: "index_points_on_member_id"
+    t.bigint "admin_id"
+    t.index ["admin_id"], name: "index_points_on_admin_id"
     t.index ["point_category_id"], name: "index_points_on_point_category_id"
   end
 
+  add_foreign_key "points", "admins"
   add_foreign_key "points", "members"
   add_foreign_key "points", "point_categories"
 end
