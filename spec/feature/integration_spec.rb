@@ -13,7 +13,7 @@ RSpec.describe 'Creating a Member', type: :feature do
     fill_in "member[first_name]", with: 'John'
     fill_in "member[last_name]", with: 'Smith'
     fill_in "member[email]", with: 'test@tamu.edu'
-    fill_in "member[phone]", with: '123456789'
+    fill_in "member[phone]", with: 123456789
     fill_in "member[email]", with: 'Test Role'
     click_on 'Create Member'
     expect(page).to have_content('Member was successfully created.')
@@ -74,7 +74,7 @@ RSpec.describe 'Creating a Point', type: :feature do
     # save_and_open_page
 
     visit new_point_path
-    fill_in "point[member_id]", with: 1
+    fill_in "point[admin_id]", with: 1
     fill_in "point[point_category_id]", with: 1
     fill_in "point[is_approved]", with: true
     click_on 'Create Point'
@@ -87,7 +87,7 @@ RSpec.describe 'Creating a Point', type: :feature do
 
   scenario 'invalid inputs' do
     visit new_point_path
-    fill_in "point[member_id]", with: nil
+    fill_in "point[admin_id]", with: nil
     fill_in "point[point_category_id]", with: nil
     fill_in "point[is_approved]", with: nil
     click_on 'Create Point category'
