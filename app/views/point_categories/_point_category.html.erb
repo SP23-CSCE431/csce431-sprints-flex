@@ -1,12 +1,5 @@
-<div id="<%= dom_id point_category %>">
-  <p>
-    <strong>Name:</strong>
-    <%= point_category.name %>
-  </p>
-
-  <p>
-    <strong>Value:</strong>
-    <%= point_category.value %>
-  </p>
-
-</div>
+<tr id="<%= dom_id point_category %>">
+  <th scope="row"><%= point_category.name %></th>
+  <td><%= point_category.value %> pts</td>
+  <td><%= link_to "Edit", edit_point_category_path(point_category.id) %></td>
+</tr>

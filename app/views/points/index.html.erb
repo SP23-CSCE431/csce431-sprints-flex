@@ -1,20 +1,31 @@
-<p style="color: green"><%= notice %></p>
-<%= link_to "Sign Out", destroy_admin_session_path %>
+<% if notice %>
+  <p style="color: green"><%= notice %></p>
+<% end %>
 
 <h1>Points</h1>
 
-<div id="points">
+<article class="total-points">
+  <div class="flex-space-between">
+    <div>Total Points</div>
+    <div><strong><%= @user_total_points %></strong></div>    
+  </div>
+</article>
+
+<%= link_to "Add Points", new_point_path, role: "button" %>
+
+<article id="verified-points">
+  <header>Awaiting Review</header>
   <% @points.each do |point| %>
-    <%= render point %>
-    <p>
-      <%= link_to "Show this point", point %>
-    </p>
+    <% if point.is_approved == nil %>
+      <%= render point %>
+    <% end %>
   <% end %>
-</div>
+</article>
 
-<%= link_to "New point", new_point_path %>
-<br />
-<%= link_to "New Member", new_member_path %>
-<br />
-<%= link_to "New Point Category", new_point_category_path%>
-
+<article id="verified-points">
+  <% @points.each do |point| %>
+    <% if point.is_approved || point.is_approved == false %>
+      <%= render point %>
+    <% end %>
+  <% end %>
+</article>
