@@ -75,6 +75,7 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
   gem "webdrivers"
+gem 'simplecov', :require => false
 end
 
 gem 'yaml_db'
@@ -84,3 +85,7 @@ gem 'seed_dump'
 gem 'devise'
 gem 'omniauth', '~>1.9.1'
 gem 'omniauth-google-oauth2'
+
+gem 'faker'
+
+gem 'brakeman'

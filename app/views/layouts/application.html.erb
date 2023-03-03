@@ -14,14 +14,17 @@
         .flash__notice  { color: blue; }
         .flash__success { color: green; }
     </style>
+    <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@1.*/css/pico.min.css">
   </head>
 
   <body>
-    <% if flash.any? %>
-      <% flash.each do |key, value| -%>
-        <section class="flash flash__<%= key %>"><%= value.html_safe %></section>
-      <% end -%>
-    <% end %>
-    <%= yield %>
+    <div class="container">
+      <% if flash.any? %>
+        <% flash.each do |key, value| -%>
+          <section class="flash flash__<%= key %>"><%= value.html_safe %></section>
+        <% end -%>
+      <% end %>
+      <%= yield %>
+    </div>
   </body>
 </html>

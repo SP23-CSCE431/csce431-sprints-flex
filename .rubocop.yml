@@ -468,3 +468,130 @@ RSpec/IdenticalEqualityAssertion: # (new in 2.4)
 
 RSpec/MultipleExpectations:
     Enabled: false
+
+# Offense count: 197
+# This cop supports safe autocorrection (--autocorrect).
+# Configuration parameters: EnforcedStyle, ConsistentQuotesInMultiline.
+# SupportedStyles: single_quotes, double_quotes
+Style/StringLiterals:
+  Enabled: false
+
+# Offense count: 8
+# This cop supports safe autocorrection (--autocorrect).
+# Configuration parameters: EnforcedStyle.
+# SupportedStyles: normal, indented_internal_methods
+Layout/IndentationConsistency:
+  Enabled: false
+  Exclude:
+    - 'app/controllers/members_controller.rb'
+    - 'app/controllers/point_categories_controller.rb'
+    - 'app/controllers/points_controller.rb'
+    - 'app/models/point.rb'
+
+# Offense count: 48
+# This cop supports unsafe autocorrection (--autocorrect-all).
+# Configuration parameters: EnforcedStyle.
+# SupportedStyles: always, always_true, never
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+# Offense count: 3
+# This cop supports unsafe autocorrection (--autocorrect-all).
+# Configuration parameters: AllowImplicitReturn, AllowedReceivers.
+Rails/SaveBang:
+  Enabled: false
+  Exclude:
+    - 'app/controllers/members_controller.rb'
+    - 'app/controllers/point_categories_controller.rb'
+    - 'app/controllers/points_controller.rb'
+
+# Offense count: 7
+# This cop supports safe autocorrection (--autocorrect).
+# Configuration parameters: EnforcedStyle.
+# SupportedStyles: compact, expanded
+Style/EmptyMethod:
+  Enabled: false
+  Exclude:
+    - 'app/controllers/dashboards_controller.rb'
+    - 'app/controllers/members_controller.rb'
+    - 'app/controllers/point_categories_controller.rb'
+    - 'app/controllers/points_controller.rb'
+
+# Offense count: 1
+# This cop supports safe autocorrection (--autocorrect).
+Layout/EmptyLineAfterGuardClause:
+  Enabled: false
+  Exclude:
+    - 'app/models/admin.rb'
+
+# Offense count: 1
+# This cop supports safe autocorrection (--autocorrect).
+Performance/RegexpMatch:
+  Enabled: false
+  Exclude:
+    - 'app/models/admin.rb'
+
+# Offense count: 22
+# This cop supports safe autocorrection (--autocorrect).
+# Configuration parameters: EnforcedStyle, EnforcedStyleForEmptyBraces.
+# SupportedStyles: space, no_space, compact
+# SupportedStylesForEmptyBraces: space, no_space
+Layout/SpaceInsideHashLiteralBraces:
+  Enabled: false
+  Exclude:
+    - 'db/seeds.rb'
+
+# Offense count: 3
+# This cop supports safe autocorrection (--autocorrect).
+# Configuration parameters: EnforcedStyle.
+# SupportedStyles: symmetrical, new_line, same_line
+Layout/MultilineMethodCallBraceLayout:
+  Enabled: false
+  Exclude:
+    - 'db/seeds.rb'
+
+# Offense count: 2
+RSpec/MultipleDescribes:
+  Enabled: false
+  Exclude:
+    - 'spec/feature/integration_spec.rb'
+    - 'spec/unit/unit_spec.rb'
+
+# Offense count: 6
+# This cop supports safe autocorrection (--autocorrect).
+# Configuration parameters: EnabledMethods.
+RSpec/Capybara/FeatureMethods:
+  Enabled: false
+  Exclude:
+    - 'spec/feature/integration_spec.rb'
+
+# Offense count: 1
+Style/InlineComment:
+  Enabled: false
+  Exclude:
+    - 'spec/rails_helper.rb'
+
+# Offense count: 21
+# Configuration parameters: EnforcedStyle, IgnoreSharedExamples.
+# SupportedStyles: always, named_only
+RSpec/NamedSubject:
+  Enabled: false
+  Exclude:
+    - 'spec/unit/unit_spec.rb'
+
+# Offense count: 1
+# This cop supports safe autocorrection (--autocorrect).
+# Configuration parameters: EnforcedStyle.
+# SupportedStyles: empty_lines, no_empty_lines
+Layout/EmptyLinesAroundBlockBody:
+  Enabled: false
+  Exclude:
+    - 'spec/unit/unit_spec.rb'
+
+# Offense count: 4
+# This cop supports safe autocorrection (--autocorrect).
+# Configuration parameters: AllowHeredoc, AllowURI, URISchemes, IgnoreCopDirectives, AllowedPatterns.
+# URISchemes: http, https
+Layout/LineLength:
+  Enabled: false
+  Max: 179
