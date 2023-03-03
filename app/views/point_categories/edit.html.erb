@@ -1,10 +1,10 @@
-<h1>Editing point category</h1>
+<h1>"<%= @point_category.name %>" Point Category</h1>
 
-<%= render "form", point_category: @point_category %>
+<article>
+  <%= render "form", point_category: @point_category %>
+  <footer>
+    <%= link_to "Back to point categories", point_categories_path %>
+  </footer>
+</article>
 
-<br>
-
-<div>
-  <%= link_to "Show this point category", @point_category %> |
-  <%= link_to "Back to point categories", point_categories_path %>
-</div>
+<%= button_to "Delete", @point_category, method: :delete, class: "secondary" %>

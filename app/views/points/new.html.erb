@@ -1,9 +1,6 @@
-<h1>New point</h1>
+<h1>Request Points</h1>
 
-<%= render "form", point: @point %>
-
-<br>
-
-<div>
-  <%= link_to "Back to points", points_path %>
-</div>
+<article>
+  <%= render "form", point: @point %>
+  <footer><%= link_to "Back to points", points_path %></footer>
+</article>
