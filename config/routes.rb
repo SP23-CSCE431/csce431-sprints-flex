@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :budget_requests
+  resources :budget_categories
   #devise_for :admins
   resources :points
   resources :point_categories

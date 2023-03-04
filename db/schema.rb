@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_03_173942) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_04_015524) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -33,15 +33,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_03_173942) do
   end
 
   create_table "budget_requests", force: :cascade do |t|
-    t.bigint "member_id", null: false
     t.bigint "budget_category_id", null: false
     t.boolean "is_approved"
     t.string "description"
     t.float "value"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "admin_id"
+    t.index ["admin_id"], name: "index_budget_requests_on_admin_id"
     t.index ["budget_category_id"], name: "index_budget_requests_on_budget_category_id"
-    t.index ["member_id"], name: "index_budget_requests_on_member_id"
   end
 
   create_table "members", force: :cascade do |t|
@@ -71,8 +71,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_03_173942) do
     t.index ["point_category_id"], name: "index_points_on_point_category_id"
   end
 
+  add_foreign_key "budget_requests", "admins"
   add_foreign_key "budget_requests", "budget_categories"
-  add_foreign_key "budget_requests", "members"
   add_foreign_key "points", "admins"
   add_foreign_key "points", "point_categories"
 end
