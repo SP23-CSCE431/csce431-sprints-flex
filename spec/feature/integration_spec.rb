@@ -167,3 +167,93 @@ RSpec.describe 'Creating a Point', type: :feature do
     expect(page).to have_content('can\'t be blank')
   end
 end
+
+RSpec.describe 'Creating a Budget Category', type: :feature do
+  # Stub the google oauth by providing fake credentials
+  before do
+    OmniAuth.config.mock_auth[:google_oauth2] = nil
+    OmniAuth.config.add_mock(:google_oauth2, {
+        provider: 'google_oauth2',
+        uid: '123456789',
+        info: {
+          email: 'test@example.com',
+          name: 'Test User'
+        },
+        credentials: {
+          token: 'token',
+          refresh_token: 'refresh_token',
+          expires_at: Time.now + 1.week
+        }
+    })
+
+    # First sign in
+    visit new_admin_session_path
+    click_link 'Sign in with Google'
+  end
+  
+  scenario 'valid inputs' do
+    visit new_budget_category_path
+    fill_in "budget_category[name]", with: 'Test Category'
+    click_on 'Create Budget category'
+    expect(page).to have_content('Budget category was successfully created.')
+    expect(page).to have_content('Test Category')
+    click_on 'Destroy Budget category'
+    expect(page).to have_content('Budget category was successfully destroyed.')
+  end
+
+  scenario 'invalid inputs' do
+    visit new_budget_category_path
+    fill_in "budget_category[name]", with: ''
+    click_on 'Create Budget category'
+    expect(page).to have_content('cannot be empty')
+  end
+end
+
+RSpec.describe 'Creating a Budget Request', type: :feature do
+  # Stub the google oauth by providing fake credentials
+  before do
+    OmniAuth.config.mock_auth[:google_oauth2] = nil
+    OmniAuth.config.add_mock(:google_oauth2, {
+        provider: 'google_oauth2',
+        uid: '123456789',
+        info: {
+          email: 'test@example.com',
+          name: 'Test User'
+        },
+        credentials: {
+          token: 'token',
+          refresh_token: 'refresh_token',
+          expires_at: Time.now + 1.week
+        }
+    })
+
+    # First sign in
+    visit new_admin_session_path
+    click_link 'Sign in with Google'
+  end
+  
+  scenario 'valid inputs' do
+    visit new_budget_request_path
+    fill_in "budget_request[admin_id]", with: 1
+    fill_in "budget_request[budget_category_id]", with: 1
+    fill_in "budget_request[value]", with: 2
+    fill_in "budget_request[is_approved]", with: true
+    click_on 'Create Budget request'
+    expect(page).to have_content('Budget request was successfully created.')
+    expect(page).to have_content('1')
+    expect(page).to have_content('2')
+    expect(page).to have_content('true')
+    click_on 'Destroy Budget request'
+    expect(page).to have_content('Budget request was successfully destroyed.')
+  end
+
+  scenario 'invalid inputs' do
+    visit new_point_path
+    fill_in "budget_request[admin_id]", with: nil
+    fill_in "budget_request[budget_category_id]", with: nil
+    fill_in "budget_request[value]", with: nil
+    fill_in "budget_request[is_approved]", with: nil
+    click_on 'Create Budget request'
+    expect(page).to have_content('cannot be empty')
+  end
+end
