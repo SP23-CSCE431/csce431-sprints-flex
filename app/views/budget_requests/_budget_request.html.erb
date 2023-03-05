@@ -1,2 +1,23 @@
-<div id="<%= dom_id budget_request %>">
-</div>
+<details id="<%= dom_id budget_request %>">
+    <summary>
+    <% if budget_request.is_approved == false %>
+    <span data-tooltip="Rejected" data-placement="top" style="display: inline-block; margin-right: 5px;">
+      <svg xmlns="http://www.w3.org/2000/svg" height="22" viewBox="0 96 960 960" width="22" style="vertical-align: sub; opacity: .6"><path d="M308 748q11 11 28 11t28-11l116-116 117 117q11 11 27.5 10.5T652 748q11-11 11-28t-11-28L536 576l117-117q11-11 10.5-27.5T652 404q-11-11-28-11t-28 11L480 520 363 403q-11-11-27.5-10.5T308 404q-11 11-11 28t11 28l116 116-117 117q-11 11-10.5 27.5T308 748Zm172 228q-83 0-156-31.5T197 859q-54-54-85.5-127T80 576q0-83 31.5-156T197 293q54-54 127-85.5T480 176q83 0 156 31.5T763 293q54 54 85.5 127T880 576q0 83-31.5 156T763 859q-54 54-127 85.5T480 976Z"/></svg>
+    </span>
+    <% end %>
+
+    <% if budget_request.is_approved %>
+    <span data-tooltip="Verified" data-placement="top" style="display: inline-block; margin-right: 5px;">
+      <svg xmlns="http://www.w3.org/2000/svg" height="22" viewBox="0 96 960 960" width="22" style="vertical-align: sub; color: var(--primary)"><path d="m421 613-61-61q-16.628-17-40.814-17t-42.447 18.261Q260 570 260 594.5q0 24.5 17 41.5l100 100q18 18 44 18t44-18l212-213q17-17 17-40.636 0-23.637-18-41.364-17-17-41.5-17T593 441L421 613Zm59 397q-91 0-169.987-34.084-78.988-34.083-137.417-92.512T80.084 745.987Q46 667 46 576t34.084-169.987q34.083-78.988 92.512-137.417t137.417-92.512Q389 142 480 142t169.987 34.084q78.988 34.083 137.417 92.512t92.512 137.417Q914 485 914 576t-34.084 169.987q-34.083 78.988-92.512 137.417t-137.417 92.512Q571 1010 480 1010Z"/></svg>
+    </span>
+    <% end %>
+
+      <%= budget_request.budget_category.name %>  
+    <span class="inline-block helper-text">00/00/0000</span>
+  </summary>
+  <p>Description</p>
+  <span class="block helper-text">Sent at <%= budget_request.created_at %></span>
+  <% if budget_request.is_approved != nil %>
+  <span class="block helper-text">Reviewed at <%= budget_request.updated_at %></span>
+  <% end %>
+</details>

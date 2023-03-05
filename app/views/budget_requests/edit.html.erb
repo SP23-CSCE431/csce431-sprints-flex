@@ -1,10 +1,6 @@
 <h1>Editing budget request</h1>
 
-<%= render "form", budget_request: @budget_request %>
-
-<br>
-
-<div>
-  <%= link_to "Show this budget request", @budget_request %> |
-  <%= link_to "Back to budget requests", budget_requests_path %>
-</div>
+<article>
+  <%= render "form", budget_request: @budget_request %>
+  <footer><%= link_to "Back to budget requests", budget_requests_path %></footer>
+</article>

@@ -6,7 +6,6 @@ class BudgetRequestsController < ApplicationController
     @budget_requests = BudgetRequest.all
     @user_id = current_admin.id
     @budget_requests = BudgetRequest.where(admin_id: @user_id)
-    @user_total_points = Point.where(admin_id: @user_id, is_approved: true).count
   end
 
   # GET /budget_requests/1 or /budget_requests/1.json
@@ -71,6 +70,6 @@ class BudgetRequestsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def budget_request_params
-      params..require(:budget_category).permit(:admin_id, :budget_category_id, :is_approved, :value, :description)
+      params.require(:budget_category).permit(:admin_id, :budget_category_id, :is_approved, :value, :description)
     end
 end
