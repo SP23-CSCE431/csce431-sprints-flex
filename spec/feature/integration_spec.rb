@@ -257,3 +257,40 @@ RSpec.describe 'Creating a Budget Request', type: :feature do
     expect(page).to have_content('cannot be empty')
   end
 end
+
+RSpec.describe 'Displaying Points by Categories', type: :feature do
+# Stub the google oauth by providing fake credentials
+  before do
+    OmniAuth.config.mock_auth[:google_oauth2] = nil
+    OmniAuth.config.add_mock(:google_oauth2, {
+        provider: 'google_oauth2',
+        uid: '123456789',
+        info: {
+          email: 'test@example.com',
+          name: 'Test User'
+        },
+        credentials: {
+          token: 'token',
+          refresh_token: 'refresh_token',
+          expires_at: Time.now + 1.week
+        }
+    })
+
+    # First sign in
+    visit new_admin_session_path
+    click_link 'Sign in with Google'
+  end
+
+  scenario 'one point' do
+    visit root_path
+    expect(page.text).to include("Test Category 1    1")
+  end
+
+  scenario 'two points' do
+    new_point = Point.create(admin_id: 5, point_category_id: 1, is_approved: true)
+
+    visit new_point_path
+    visit root_path
+    expect(page.text).to include("Test Category 1    2")
+  end
+end 

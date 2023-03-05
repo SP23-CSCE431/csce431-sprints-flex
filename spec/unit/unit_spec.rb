@@ -5,28 +5,33 @@ RSpec.describe PointCategory, type: :model do
   # Sunny cases
 
   subject do
-    described_class.new(name: 'Category 1', value: 1)
+    described_class.new(name: nil, value: nil)
   end
 
   it 'is valid with valid attributes' do
+    subject.name = "Test Category 1"
+    subject.value = 1
     expect(subject).to be_valid
   end
 
   it 'is valid with large integers' do
+    subject.name = "Test Category 1"
     subject.value = 1000000
     expect(subject).to be_valid
   end
 
   it 'is valid with zero' do
+    subject.name = "Test Category 1"
     subject.value = 0
     expect(subject).to be_valid
   end
 
   it 'is valid with more than 3 characters' do
-    subject.value = 'Test'
+    subject.name = 'Test'
+    subject.value = 1
     expect(subject).to be_valid
 
-    subject.value = 'Point'
+    subject.name = 'Point'
     expect(subject).to be_valid
   end
 
@@ -34,21 +39,24 @@ RSpec.describe PointCategory, type: :model do
   
   it 'is not valid without a name' do
     subject.name = nil
-    expect(subject).not_to be_valid
+    expect(subject).to_not be_valid
   end
 
   it 'is not valid without a value' do
     subject.value = nil
-    expect(subject).not_to be_valid
+    expect(subject).to_not be_valid
   end
 
   it 'is not valid with non-numeric value' do
+    subject.name = 'Test'
     subject.value = 'hello'
     expect(subject).not_to be_valid
+   
   end
 
   it 'is not valid with non-alphabetic value' do
     subject.name = 1
+    subject.value = 1
     expect(subject).not_to be_valid
 
     subject.name = true
@@ -59,11 +67,13 @@ RSpec.describe PointCategory, type: :model do
   end
 
   it 'is not valid with negative value' do
+    subject.name = 'Test'
     subject.value = -1
     expect(subject).not_to be_valid
   end
 
   it 'is not valid with float value' do
+    subject.name = 'Test'
     subject.value = 1.1
     expect(subject).not_to be_valid
 
@@ -73,6 +83,7 @@ RSpec.describe PointCategory, type: :model do
 
   it 'is not valid with less than or equal to 3 characters' do
     subject.name = 'abc'
+    subject.value = 1
     expect(subject).not_to be_valid
 
     subject.name = 'ab'
