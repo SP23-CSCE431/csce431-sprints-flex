@@ -3,6 +3,7 @@
 <% end %>
 
 <h1>Points</h1>
+<h1><%= @num_per_category %></h1>
 
 <article class="total-points">
   <div class="flex-space-between">
@@ -28,4 +29,12 @@
       <%= render point %>
     <% end %>
   <% end %>
+</article>
+
+<article id="verified-points">
+  <div class="block-space-between">
+    <% @num_per_category.each do |point| %>
+      <div><strong><%= point.first %> &emsp;&emsp; <%= point.last %></strong></div>
+    <% end %>
+  </div>
 </article>

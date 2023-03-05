@@ -6,6 +6,7 @@ class PointsController < ApplicationController
     @user_id = current_admin.id
     @points = Point.where(admin_id: @user_id)
     @user_total_points = Point.where(admin_id: @user_id, is_approved: true).count
+    @num_per_category = Point.joins(:point_category).group(:name).where(admin_id: @user_id, is_approved: true).count
   end
 
   # GET /points/1 or /points/1.json

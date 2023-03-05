@@ -5,28 +5,33 @@ RSpec.describe PointCategory, type: :model do
   # Sunny cases
 
   subject do
-    described_class.new(name: 'Category 1', value: 1)
+    described_class.new(name: nil, value: nil)
   end
 
   it 'is valid with valid attributes' do
+    subject.name = "Test Category 1"
+    subject.value = 1
     expect(subject).to be_valid
   end
 
   it 'is valid with large integers' do
+    subject.name = "Test Category 1"
     subject.value = 1000000
     expect(subject).to be_valid
   end
 
   it 'is valid with zero' do
+    subject.name = "Test Category 1"
     subject.value = 0
     expect(subject).to be_valid
   end
 
   it 'is valid with more than 3 characters' do
-    subject.value = 'Test'
+    subject.name = 'Test'
+    subject.value = 1
     expect(subject).to be_valid
 
-    subject.value = 'Point'
+    subject.name = 'Point'
     expect(subject).to be_valid
   end
 
@@ -34,21 +39,24 @@ RSpec.describe PointCategory, type: :model do
   
   it 'is not valid without a name' do
     subject.name = nil
-    expect(subject).not_to be_valid
+    expect(subject).to_not be_valid
   end
 
   it 'is not valid without a value' do
     subject.value = nil
-    expect(subject).not_to be_valid
+    expect(subject).to_not be_valid
   end
 
   it 'is not valid with non-numeric value' do
+    subject.name = 'Test'
     subject.value = 'hello'
     expect(subject).not_to be_valid
+   
   end
 
   it 'is not valid with non-alphabetic value' do
     subject.name = 1
+    subject.value = 1
     expect(subject).not_to be_valid
 
     subject.name = true
@@ -59,11 +67,13 @@ RSpec.describe PointCategory, type: :model do
   end
 
   it 'is not valid with negative value' do
+    subject.name = 'Test'
     subject.value = -1
     expect(subject).not_to be_valid
   end
 
   it 'is not valid with float value' do
+    subject.name = 'Test'
     subject.value = 1.1
     expect(subject).not_to be_valid
 
@@ -73,6 +83,7 @@ RSpec.describe PointCategory, type: :model do
 
   it 'is not valid with less than or equal to 3 characters' do
     subject.name = 'abc'
+    subject.value = 1
     expect(subject).not_to be_valid
 
     subject.name = 'ab'
@@ -318,6 +329,150 @@ RSpec.describe Point, type: :model do
 
   it 'is not valid with an invalid admin id' do
     subject.admin_id = -1
+    expect(subject).not_to be_valid
+  end
+
+end
+
+
+RSpec.describe BudgetRequest, type: :model do
+  subject do
+    described_class.new(admin_id: 1, budget_category_id: 1, value: 2.5)
+  end
+
+  # Sunny Cases
+
+  it 'is valid with valid attributes' do
+    expect(subject).to be_valid
+  end
+
+  it 'is valid with a valid id' do
+    subject.admin_id = 0
+    expect(subject).to be_valid
+
+    subject.budget_category_id = 0
+    expect(subject).to be_valid
+  end
+
+  it 'is valid with large integers' do
+    subject.value = 1000000
+    expect(subject).to be_valid
+  end
+
+  # Rainy Cases
+
+  it 'is not valid without a admin id' do
+    subject.admin_id = nil
+    expect(subject).not_to be_valid
+  end
+
+  it 'is not valid without a point category id' do
+    subject.budget_category_id = nil
+    expect(subject).not_to be_valid
+  end
+
+  it 'is not valid without a value' do
+    subject.value = nil
+    expect(subject).not_to be_valid
+  end
+
+  it 'is not valid with non-numeric value' do
+    subject.value = 'hello'
+    expect(subject).not_to be_valid
+  end
+
+  it 'is not valid with an invalid value' do
+    subject.value = -1
+    expect(subject).not_to be_valid
+    subject.value = -1.1
+    expect(subject).not_to be_valid
+  end
+
+  it 'is not valid with a non integer budget category id' do
+    subject.budget_category_id = 'hello'
+    expect(subject).not_to be_valid
+
+    subject.budget_category_id = true
+    expect(subject).not_to be_valid
+
+    subject.budget_category_id = 1.1
+    expect(subject).not_to be_valid
+
+    subject.budget_category_id = -1.1
+    expect(subject).not_to be_valid
+  end
+
+  it 'is not valid with an invalid budget category id' do
+    subject.budget_category_id = -1
+    expect(subject).not_to be_valid
+  end
+
+  it 'is not valid with a non integer admin id' do
+    subject.admin_id = 'hello'
+    expect(subject).not_to be_valid
+
+    subject.admin_id = true
+    expect(subject).not_to be_valid
+
+    subject.admin_id = 1.1
+    expect(subject).not_to be_valid
+
+    subject.admin_id = -1.1
+    expect(subject).not_to be_valid
+  end
+
+  it 'is not valid with an invalid admin id' do
+    subject.admin_id = -1
+    expect(subject).not_to be_valid
+  end
+
+end
+
+RSpec.describe BudgetCategory, type: :model do
+  # Sunny cases
+
+  subject do
+    described_class.new(name: 'Category 1')
+  end
+
+  it 'is valid with valid attributes' do
+    expect(subject).to be_valid
+  end
+
+  it 'is valid with more than 3 characters' do
+    subject.name = 'Test'
+    expect(subject).to be_valid
+
+    subject.name = 'Point'
+    expect(subject).to be_valid
+  end
+
+  # Rainy cases
+  
+  it 'is not valid without a name' do
+    subject.name = nil
+    expect(subject).not_to be_valid
+  end
+
+  it 'is not valid with non-alphabetic value' do
+    subject.name = 1
+    expect(subject).not_to be_valid
+
+    subject.name = true
+    expect(subject).not_to be_valid
+
+    subject.name = 1.1
+    expect(subject).not_to be_valid
+  end
+
+  it 'is not valid with less than or equal to 3 characters' do
+    subject.name = 'abc'
+    expect(subject).not_to be_valid
+
+    subject.name = 'ab'
+    expect(subject).not_to be_valid
+
+    subject.name = 'b'
     expect(subject).not_to be_valid
   end
 
