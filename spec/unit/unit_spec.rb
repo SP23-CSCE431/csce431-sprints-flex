@@ -97,7 +97,7 @@ end
 
 RSpec.describe Member, type: :model do
   subject do
-    described_class.new(first_name: "John", last_name: "Smith", email: "test@tamu.edu", phone: 1234567890, role: "member")
+    described_class.new(first_name: 'John', last_name: 'Smith', email: 'test@tamu.edu', phone: 1234567890, role: 'member')
   end
 
   # Sunny Cases
@@ -107,18 +107,18 @@ RSpec.describe Member, type: :model do
   end
 
   it 'is valid with a valid email' do
-    subject.email = "t@tamu.edu"
+    subject.email = 't@tamu.edu'
     expect(subject).to be_valid
 
-    subject.email = "a.a@tamu.edu"
+    subject.email = 'a.a@tamu.edu'
     expect(subject).to be_valid
   end
 
   it 'is valid with a valid phone' do
-    subject.phone = 1234567890
+    subject.phone = '1234567890'
     expect(subject).to be_valid
 
-    subject.phone = 9999999999
+    subject.phone = '9999999999'
     expect(subject).to be_valid
   end
 
@@ -210,25 +210,25 @@ RSpec.describe Member, type: :model do
   end
 
   it 'is not valid without a valid phone number' do
-    subject.phone = 123
+    subject.phone = '123'
     expect(subject).not_to be_valid
 
-    subject.phone = -123
+    subject.phone = '-123'
     expect(subject).not_to be_valid
 
-    subject.phone = 0
+    subject.phone = '0'
     expect(subject).not_to be_valid
 
-    subject.phone = 1.1
+    subject.phone = '1.1'
     expect(subject).not_to be_valid
 
-    subject.phone = -1.1
+    subject.phone = '-1.1'
     expect(subject).not_to be_valid
 
-    subject.phone = 99999999
+    subject.phone = '99999999'
     expect(subject).not_to be_valid
 
-    subject.phone = -99999999
+    subject.phone = '-99999999'
     expect(subject).not_to be_valid
   end
 
