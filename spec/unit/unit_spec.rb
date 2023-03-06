@@ -275,10 +275,10 @@ RSpec.describe Point, type: :model do
   end
 
   it 'is valid with a valid id' do
-    subject.admin_id = 0
+    subject.admin_id = 1
     expect(subject).to be_valid
 
-    subject.point_category_id = 0
+    subject.point_category_id = 1
     expect(subject).to be_valid
   end
 
@@ -347,10 +347,10 @@ RSpec.describe BudgetRequest, type: :model do
   end
 
   it 'is valid with a valid id' do
-    subject.admin_id = 0
+    subject.admin_id = 1
     expect(subject).to be_valid
 
-    subject.budget_category_id = 0
+    subject.budget_category_id = 1
     expect(subject).to be_valid
   end
 
