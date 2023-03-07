@@ -154,6 +154,10 @@ RSpec.describe 'Creating a Point', type: :feature do
 
     visit new_point_path
     select "Test Category 1", :from => "point[point_category_id]"
+    point_category_select = find('#point_point_category_id')
+    point_category_select.set('Test Category 1')
+    fill_in "point[date_attended]", with: '2023-10-10'
+    fill_in "point[description]", with: 'Test'
     click_on 'Create Point'
     expect(page).to have_content('Point was successfully created')
     expect(page).to have_content('Test Category 1')
@@ -163,6 +167,10 @@ RSpec.describe 'Creating a Point', type: :feature do
 
   scenario 'invalid inputs' do
     visit new_point_path
+    point_category_select = find('#point_point_category_id')
+    point_category_select.set('')
+    fill_in "point[date_attended]", with: ''
+    fill_in "point[description]", with: ''
     click_on 'Create Point'
     expect(page).to have_content('can\'t be blank')
   end
