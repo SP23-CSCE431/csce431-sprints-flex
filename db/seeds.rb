@@ -18,7 +18,7 @@ Point.create!([
   {admin_id: 5, point_category_id: 1, is_approved: true}
 ])
 BudgetCategory.create!([
-  {name: "Test Category 1"},
+  {name: "Test Category"},
   {name: "Test Category 2"},
   {name: "Test Category 3"},
   {name: "Test Category 4"},
