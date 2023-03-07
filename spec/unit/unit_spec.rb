@@ -282,6 +282,16 @@ RSpec.describe Point, type: :model do
     expect(subject).to be_valid
   end
 
+  it 'is valid with a valid description' do
+    subject.description = 'Test'
+    expect(subject).to be_valid
+  end
+
+  it 'is valid with a valid date' do
+    subject.date_attended = '2023-10-10'
+    expect(subject).to be_valid
+  end
+
   # Rainy Cases
 
   it 'is not valid without a admin id' do

@@ -67,6 +67,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_04_015524) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "admin_id"
+    t.string "description"
+    t.date "date_attended"
     t.index ["admin_id"], name: "index_points_on_admin_id"
     t.index ["point_category_id"], name: "index_points_on_point_category_id"
   end

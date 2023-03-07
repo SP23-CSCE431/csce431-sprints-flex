@@ -4,7 +4,8 @@ class PointsController < ApplicationController
   # GET /points or /points.json
   def index
     @user_id = current_admin.id
-    @points = Point.where(admin_id: @user_id)
+    @points = Point.where(admin_id: @user_id).where.not(is_approved: nil)
+    @pending_points = Point.where(admin_id: @user_id, is_approved: nil)
     @user_total_points = Point.where(admin_id: @user_id, is_approved: true).count
     @num_per_category = Point.joins(:point_category).group(:name).where(admin_id: @user_id, is_approved: true).count
   end
@@ -72,6 +73,6 @@ class PointsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def point_params
-      params.require(:point).permit(:admin_id, :point_category_id, :is_approved)
+      params.require(:point).permit(:admin_id, :point_category_id, :is_approved, :description, :date_attended)
     end
 end

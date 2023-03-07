@@ -13,9 +13,9 @@
     <% end %>
 
       <%= point.point_category.name %>  
-    <span class="inline-block helper-text">00/00/0000</span>
+    <span class="inline-block helper-text"><%= point.date_attended %></span>
   </summary>
-  <p>Description</p>
+  <p><%= point.description %></p>
   <span class="block helper-text">Sent at <%= point.created_at %></span>
   <% if point.is_approved != nil %>
   <span class="block helper-text">Reviewed at <%= point.updated_at %></span>

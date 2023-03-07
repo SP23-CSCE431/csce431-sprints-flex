@@ -17,6 +17,17 @@
   </div>
 
   <div>
+    <%= form.label :description, style: "display: block" %>
+    <%= form.text_field :description %>
+  </div>
+
+
+  <div>
+    <%= form.label "Attended on", style: "display: block" %>
+    <%= form.date_field :date_attended, value: Date.today %>
+  </div>
+
+  <div>
     <%= form.submit %>
   </div>
 <% end %>
