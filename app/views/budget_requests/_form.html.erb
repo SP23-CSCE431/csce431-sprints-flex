@@ -12,6 +12,21 @@
   <% end %>
 
   <div>
+    <label for="budget_request_budget_category_id">Category</label>
+    <%= form.select :budget_category_id, BudgetCategory.order(:name).map { |budget_category| [budget_category.name, budget_category.id] }, include_blank: true, id: "id_of_the_budget_category_id_select_box" %>
+  </div>
+
+  <div>
+    <%= form.label :value, style: "display: block" %>
+    <%= form.number_field :value, step: 0.01 %>
+  </div>
+
+  <div>
+    <%= form.label :description, style: "display: block" %>
+    <%= form.text_field :description %>
+  </div>
+
+  <div>
     <%= form.submit %>
   </div>
 <% end %>

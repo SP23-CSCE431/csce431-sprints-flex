@@ -197,7 +197,7 @@ RSpec.describe 'Creating a Budget Category', type: :feature do
     click_on 'Create Budget category'
     expect(page).to have_content('Budget category was successfully created.')
     expect(page).to have_content('Test Category')
-    click_on 'Destroy Budget category'
+    click_on 'Destroy this budget category'
     expect(page).to have_content('Budget category was successfully destroyed.')
   end
 
@@ -205,7 +205,7 @@ RSpec.describe 'Creating a Budget Category', type: :feature do
     visit new_budget_category_path
     fill_in "budget_category[name]", with: ''
     click_on 'Create Budget category'
-    expect(page).to have_content('cannot be empty')
+    expect(page).to have_content('can\'t be blank')
   end
 end
 
@@ -234,27 +234,24 @@ RSpec.describe 'Creating a Budget Request', type: :feature do
   
   scenario 'valid inputs' do
     visit new_budget_request_path
-    fill_in "budget_request[admin_id]", with: 1
-    fill_in "budget_request[budget_category_id]", with: 1
+    select "Test Category", :from => "budget_request[budget_category_id]"
     fill_in "budget_request[value]", with: 2
-    fill_in "budget_request[is_approved]", with: true
+    fill_in "budget_request[description]", with: 'Test'
     click_on 'Create Budget request'
     expect(page).to have_content('Budget request was successfully created.')
     expect(page).to have_content('1')
     expect(page).to have_content('2')
-    expect(page).to have_content('true')
-    click_on 'Destroy Budget request'
+    expect(page).to have_content('Test')
+    click_on 'Destroy this budget request'
     expect(page).to have_content('Budget request was successfully destroyed.')
   end
 
   scenario 'invalid inputs' do
-    visit new_point_path
-    fill_in "budget_request[admin_id]", with: nil
-    fill_in "budget_request[budget_category_id]", with: nil
+    visit new_budget_request_path
     fill_in "budget_request[value]", with: nil
-    fill_in "budget_request[is_approved]", with: nil
+    fill_in "budget_request[description]", with: nil
     click_on 'Create Budget request'
-    expect(page).to have_content('cannot be empty')
+    expect(page).to have_content('can\'t be blank')
   end
 end
 
