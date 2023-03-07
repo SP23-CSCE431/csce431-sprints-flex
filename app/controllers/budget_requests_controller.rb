@@ -2,6 +2,7 @@ class BudgetRequestsController < ApplicationController
   before_action :set_budget_request, only: %i[ show edit update destroy ]
 
   # GET /budget_requests or /budget_requests.json
+  # Query all budget request object related to a user id
   def index
     @budget_requests = BudgetRequest.all
     @user_id = current_admin.id
@@ -22,6 +23,8 @@ class BudgetRequestsController < ApplicationController
   end
 
   # POST /budget_requests or /budget_requests.json
+  # Create a new budget request object, set the user id to the signed in user,
+  # and default approval status to none
   def create
     @user_id = current_admin.id
     @budget_request = BudgetRequest.new(budget_request_params)
@@ -40,6 +43,7 @@ class BudgetRequestsController < ApplicationController
   end
 
   # PATCH/PUT /budget_requests/1 or /budget_requests/1.json
+  # Update a budget request
   def update
     respond_to do |format|
       if @budget_request.update(budget_request_params)
@@ -53,6 +57,7 @@ class BudgetRequestsController < ApplicationController
   end
 
   # DELETE /budget_requests/1 or /budget_requests/1.json
+  # Delete a budget request
   def destroy
     @budget_request.destroy
 

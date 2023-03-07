@@ -2,6 +2,7 @@ class PointCategoriesController < ApplicationController
   before_action :set_point_category, only: %i[ show edit update destroy ]
 
   # GET /point_categories or /point_categories.json
+  # Query all point category objects
   def index
     @point_categories = PointCategory.all
   end
@@ -20,6 +21,7 @@ class PointCategoriesController < ApplicationController
   end
 
   # POST /point_categories or /point_categories.json
+  # Create a new point category object
   def create
     @point_category = PointCategory.new(point_category_params)
 
@@ -35,6 +37,7 @@ class PointCategoriesController < ApplicationController
   end
 
   # PATCH/PUT /point_categories/1 or /point_categories/1.json
+  # Update a point category
   def update
     respond_to do |format|
       if @point_category.update(point_category_params)
@@ -48,6 +51,7 @@ class PointCategoriesController < ApplicationController
   end
 
   # DELETE /point_categories/1 or /point_categories/1.json
+  # Delete a point category
   def destroy
     @point_category.destroy
 

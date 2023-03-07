@@ -2,6 +2,8 @@ class PointsController < ApplicationController
   before_action :set_point, only: %i[ show edit update destroy ]
 
   # GET /points or /points.json
+  # Query all points related to the signed in user id, and points that are not approved/denied (nil)
+  # Also, query the signed in user's total points and point total category
   def index
     @user_id = current_admin.id
     @points = Point.where(admin_id: @user_id).where.not(is_approved: nil)
@@ -24,12 +26,14 @@ class PointsController < ApplicationController
   end
 
   # POST /points or /points.json
+  # Create a new point object, set the user id to the signed in user,
+  # and default approval status to none
   def create
     @user_id = current_admin.id
 
     @point = Point.new(point_params)
     @point.admin_id = @user_id
-    @point.is_approved = nil
+    @point.is_approved = true
 
     respond_to do |format|
       if @point.save
@@ -43,6 +47,7 @@ class PointsController < ApplicationController
   end
 
   # PATCH/PUT /points/1 or /points/1.json
+  # Update a point
   def update
     respond_to do |format|
       if @point.update(point_params)
@@ -56,6 +61,7 @@ class PointsController < ApplicationController
   end
 
   # DELETE /points/1 or /points/1.json
+  # Delete a point
   def destroy
     @point.destroy
 

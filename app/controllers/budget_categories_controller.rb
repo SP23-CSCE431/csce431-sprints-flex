@@ -2,6 +2,7 @@ class BudgetCategoriesController < ApplicationController
   before_action :set_budget_category, only: %i[ show edit update destroy ]
 
   # GET /budget_categories or /budget_categories.json
+  # Query all budget category objects
   def index
     @budget_categories = BudgetCategory.all
   end
@@ -20,6 +21,7 @@ class BudgetCategoriesController < ApplicationController
   end
 
   # POST /budget_categories or /budget_categories.json
+  # Create a new budget category
   def create
     @budget_category = BudgetCategory.new(budget_category_params)
 
@@ -35,6 +37,7 @@ class BudgetCategoriesController < ApplicationController
   end
 
   # PATCH/PUT /budget_categories/1 or /budget_categories/1.json
+  # Update a budget category
   def update
     respond_to do |format|
       if @budget_category.update(budget_category_params)
@@ -48,6 +51,7 @@ class BudgetCategoriesController < ApplicationController
   end
 
   # DELETE /budget_categories/1 or /budget_categories/1.json
+  # Delete a budget category
   def destroy
     @budget_category.destroy
 
