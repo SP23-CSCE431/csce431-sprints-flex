@@ -18,5 +18,22 @@ Point.create!([
   {admin_id: 5, point_category_id: 1, is_approved: true}
 ])
 BudgetCategory.create!([
-  {name: 'Test Category'}
+  {name: "Test Category 1"},
+  {name: "Test Category 2"},
+  {name: "Test Category 3"},
+  {name: "Test Category 4"},
+])
+BudgetRequest.create!([
+  {admin_id: 1, budget_category_id: 1, is_approved: null, value: 5.99, description: "Pending Test"},
+  {admin_id: 2, budget_category_id: 2, is_approved: null, value: 5.99, description: "Pending Test"},
+  {admin_id: 3, budget_category_id: 3, is_approved: null, value: 5.99, description: "Pending Test"},
+  {admin_id: 4, budget_category_id: 4, is_approved: null, value: 5.99, description: "Pending Test"},
+  {admin_id: 1, budget_category_id: 1, is_approved: true, value: 5.99, description: "Approved Test"},
+  {admin_id: 2, budget_category_id: 2, is_approved: true, value: 5.99, description: "Approved Test"},
+  {admin_id: 3, budget_category_id: 3, is_approved: true, value: 5.99, description: "Approved Test"},
+  {admin_id: 4, budget_category_id: 4, is_approved: true, value: 5.99, description: "Approved Test"},
+  {admin_id: 1, budget_category_id: 1, is_approved: false, value: 5.99, description: "Denied Test"},
+  {admin_id: 2, budget_category_id: 2, is_approved: false, value: 5.99, description: "Denied Test"},
+  {admin_id: 3, budget_category_id: 3, is_approved: false, value: 5.99, description: "Denied Test"},
+  {admin_id: 4, budget_category_id: 4, is_approved: false, value: 5.99, description: "Denied Test"}
 ])
