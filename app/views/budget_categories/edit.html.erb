@@ -1,0 +1,10 @@
+<h1>"<%= @budget_category.name %>" Budget Category</h1>
+
+<article>
+  <%= render "form", budget_category: @budget_category %>
+  <footer>
+    <%= link_to "Back to budget categories", budget_categories_path %>
+  </footer>
+</article>
+
+<%= button_to "Delete", @budget_category, method: :delete, class: "secondary" %>

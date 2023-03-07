@@ -1,15 +1,182 @@
-/*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS (and SCSS, if configured) file within this directory, lib/assets/stylesheets, or any plugin's
- * vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any other CSS
- * files in this directory. Styles in this file should be added after the last require_* statement.
- * It is generally better to create a new file per style scope.
- *
- *= require_tree .
- *= require_self
+/*  Overrides */
+
+html[aria-busy='true']:before {
+  display: none !important;
+}
+
+/* Light-green Light scheme (Default) */
+/* Can be forced with data-theme="light" */
+[data-theme='light'],
+:root:not([data-theme='dark']) {
+  --primary: #42b367 !important;
+  --primary-hover: #329a54 !important;
+  --primary-focus: rgba(124, 179, 66, 0.125) !important;
+  --primary-inverse: #fff !important;
+}
+
+/* Light-green Dark scheme (Auto) */
+/* Automatically enabled if user has Dark mode enabled */
+@media only screen and (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    --primary: #42b367 !important;
+    --primary-hover: #329a54 !important;
+    --primary-focus: rgba(124, 179, 66, 0.25) !important;
+    --primary-inverse: #fff !important;
+  }
+}
+
+/* Light-green Dark scheme (Forced) */
+/* Enabled if forced with data-theme="dark" */
+[data-theme='dark'] {
+  --primary: #42b367 !important;
+  --primary-hover: #329a54 !important;
+  --primary-focus: rgba(124, 179, 66, 0.25) !important;
+  --primary-inverse: #fff !important;
+}
+
+/* Light-green (Common styles) */
+:root {
+  --form-element-active-border-color: var(--primary) !important;
+  --form-element-focus-color: var(--primary-focus) !important;
+  --switch-color: var(--primary-inverse !important);
+  --switch-checked-background-color: var(--primary) !important;
+}
+
+/* Typography */
+
+.helper-text {
+  color: var(--secondary);
+  font-size: calc(var(--font-size) - 3px);
+}
+
+/* Utility */
+
+.block {
+  display: block;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+.flex-space-between {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Avatar */
+
+.avatar {
+  width: 30px;
+  border-radius: 100px;
+  margin-right: 10px;
+}
+
+/* Badge */
+
+.badge {
+  color: var(--primary);
+  background: var(--primary-focus);
+  padding: 5px 9px;
+  margin-left: 5px;
+  border-radius: 100px;
+  font-size: calc(var(--font-size) - 4px);
+  font-weight: 500;
+}
+
+/* Total Points Card */
+
+.total-points {
+  margin-top: 0;
+  background-image: linear-gradient(
+    220deg,
+    rgba(255, 206, 149, 0.38) 30.95%,
+    rgba(255, 255, 255, 0) 30.95%
+  );
+}
+
+/* Grid 
+ * Marco Lago
  */
+
+.row {
+  margin-top: 0.5rem;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.col {
+  flex: 1 1 8%;
+  margin: 0 0 0.5rem 0;
+  padding: 0.5em 10px;
+  box-sizing: border-box;
+}
+
+.row .row,
+.row.nested {
+  flex: 1 1 auto;
+  margin-top: -0.5em;
+}
+
+.row.wide-fit {
+  margin-left: -10px;
+  margin-right: -10px;
+}
+
+.row.center {
+  justify-content: center;
+}
+
+.center .col {
+  flex-grow: 0;
+  flex-shrink: 0;
+}
+
+.col-span-1 {
+  flex-basis: 8.3333%;
+}
+
+.col-span-2 {
+  flex-basis: 16.6666%;
+}
+
+.col-span-3 {
+  flex-basis: 25%;
+}
+
+.col-span-4 {
+  flex-basis: 33.3333%;
+}
+
+.col-span-5 {
+  flex-basis: 41.6666%;
+}
+
+.col-span-6 {
+  flex-basis: 50%;
+}
+
+.col-span-7 {
+  flex-basis: 58.3333%;
+}
+
+.col-span-8 {
+  flex-basis: 66.6666%;
+}
+
+.col-span-9 {
+  flex-basis: 75%;
+}
+
+.col-span-10 {
+  flex-basis: 83.3333%;
+}
+
+.col-span-11 {
+  flex-basis: 91.6666%;
+}
+
+.col-span-12 {
+  flex-basis: 100%;
+}

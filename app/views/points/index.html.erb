@@ -1,20 +1,41 @@
-<p style="color: green"><%= notice %></p>
-<%= link_to "Sign Out", destroy_admin_session_path %>
+<% if notice %>
+  <p style="color: green"><%= notice %></p>
+<% end %>
 
 <h1>Points</h1>
 
-<div id="points">
+<article class="total-points">
+  <div class="flex-space-between">
+    <div>Total Points</div>
+    <div><strong><%= @user_total_points %></strong></div>    
+  </div>
+</article>
+
+<%= link_to "Add Points", new_point_path, role: "button" %>
+
+<% if @pending_points.count != 0 %>
+<article id="pending-points">
+  <header>Awaiting Review</header>
+  <% @pending_points.each do |point| %>
+    <%= render point %>
+  <% end %>
+</article>
+<% end %>
+
+<article id="verified-points">
+  <% if @points.count == 0 %>
+    <span class="helper-text block" style="text-align: center">No verified points yet! <%= link_to "Ready to submit points?", new_point_path %></span>
+  <% else %>
   <% @points.each do |point| %>
     <%= render point %>
-    <p>
-      <%= link_to "Show this point", point %>
-    </p>
   <% end %>
-</div>
+</article>
+<% end %>
 
-<%= link_to "New point", new_point_path %>
-<br />
-<%= link_to "New Member", new_member_path %>
-<br />
-<%= link_to "New Point Category", new_point_category_path%>
-
+<article>
+  <div class="block-space-between">
+    <% @num_per_category.each do |point| %>
+      <div><strong><%= point.first %> &emsp;&emsp; <%= point.last %></strong></div>
+    <% end %>
+  </div>
+</article>

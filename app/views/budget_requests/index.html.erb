@@ -1,0 +1,25 @@
+<% if notice %>
+  <p style="color: green"><%= notice %></p>
+<% end %>
+
+<h1>Budget Requests</h1>
+
+<%= link_to "New budget request", new_budget_request_path, role: "button" %>
+
+<article id="verified-requests">
+  <header>Awaiting Review</header>
+  <% @budget_requests.each do |budget_request| %>
+    <% if budget_request.is_approved == nil %>
+      <%= render budget_request %>
+    <% end %>
+  <% end %>
+</article>
+
+<article id="verified-requests">
+  <% @budget_requests.each do |budget_request| %>
+    <% if budget_request.is_approved || budget_request.is_approved == false %>
+      <%= render budget_request %>
+    <% end %>
+  <% end %>
+</article>
+

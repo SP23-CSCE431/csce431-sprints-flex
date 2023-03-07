@@ -1,16 +1,24 @@
-<p style="color: green"><%= notice %></p>
+<% if notice %>
+  <p style="color: green"><%= notice %></p>
+<% end %>
 
-<h1>Point categories</h1>
+<h1>Point Categories</h1>
 
-<div id="point_categories">
-  <% @point_categories.each do |point_category| %>
-    <%= render point_category %>
-    <p>
-      <%= link_to "Show this point category", point_category %>
-    </p>
-  <% end %>
-</div>
+<%= link_to "Add Category", new_point_category_path, role: "button" %>
 
-<%= link_to "New point category", new_point_category_path %>
-<br />
-<%= link_to "Back to points", points_path %>
+<article id="point_categories">
+  <table>
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Required Total</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @point_categories.each do |point_category| %>
+        <%= render point_category %>
+      <% end %>  
+    </tbody>
+  </table>
+</article>
