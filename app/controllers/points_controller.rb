@@ -33,11 +33,11 @@ class PointsController < ApplicationController
 
     respond_to do |format|
       if @point.save
-        format.html { redirect_to point_url(@point), notice: "Point was successfully created." }
-        format.json { render :show, status: :created, location: @point }
+        format.html { redirect_to(point_url(@point), notice: "Point was successfully created.") }
+        format.json { render(:show, status: :created, location: @point) }
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @point.errors, status: :unprocessable_entity }
+        format.html { render(:new, status: :unprocessable_entity) }
+        format.json { render(json: @point.errors, status: :unprocessable_entity) }
       end
     end
   end
@@ -46,11 +46,11 @@ class PointsController < ApplicationController
   def update
     respond_to do |format|
       if @point.update(point_params)
-        format.html { redirect_to point_url(@point), notice: "Point was successfully updated." }
-        format.json { render :show, status: :ok, location: @point }
+        format.html { redirect_to(point_url(@point), notice: "Point was successfully updated.") }
+        format.json { render(:show, status: :ok, location: @point) }
       else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @point.errors, status: :unprocessable_entity }
+        format.html { render(:edit, status: :unprocessable_entity) }
+        format.json { render(json: @point.errors, status: :unprocessable_entity) }
       end
     end
   end
@@ -60,8 +60,8 @@ class PointsController < ApplicationController
     @point.destroy
 
     respond_to do |format|
-      format.html { redirect_to points_url, notice: "Point was successfully destroyed." }
-      format.json { head :no_content }
+      format.html { redirect_to(points_url, notice: "Point was successfully destroyed.") }
+      format.json { head(:no_content) }
     end
   end
 

@@ -21,5 +21,5 @@ BudgetCategory.create!([
   {name: "Test Category"},
   {name: "Test Category 2"},
   {name: "Test Category 3"},
-  {name: "Test Category 4"},
+  {name: "Test Category 4"}
 ])

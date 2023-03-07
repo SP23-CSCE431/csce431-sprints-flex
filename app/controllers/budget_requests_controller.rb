@@ -1,5 +1,5 @@
 class BudgetRequestsController < ApplicationController
-  before_action :set_budget_request, only: %i[ show edit update destroy ]
+  before_action :set_budget_request, only: %i[show edit update destroy]
 
   # GET /budget_requests or /budget_requests.json
   def index
@@ -30,11 +30,11 @@ class BudgetRequestsController < ApplicationController
 
     respond_to do |format|
       if @budget_request.save
-        format.html { redirect_to budget_request_url(@budget_request), notice: "Budget request was successfully created." }
-        format.json { render :show, status: :created, location: @budget_request }
+        format.html { redirect_to(budget_request_url(@budget_request), notice: "Budget request was successfully created.") }
+        format.json { render(:show, status: :created, location: @budget_request) }
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @budget_request.errors, status: :unprocessable_entity }
+        format.html { render(:new, status: :unprocessable_entity) }
+        format.json { render(json: @budget_request.errors, status: :unprocessable_entity) }
       end
     end
   end
@@ -43,11 +43,11 @@ class BudgetRequestsController < ApplicationController
   def update
     respond_to do |format|
       if @budget_request.update(budget_request_params)
-        format.html { redirect_to budget_request_url(@budget_request), notice: "Budget request was successfully updated." }
-        format.json { render :show, status: :ok, location: @budget_request }
+        format.html { redirect_to(budget_request_url(@budget_request), notice: "Budget request was successfully updated.") }
+        format.json { render(:show, status: :ok, location: @budget_request) }
       else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @budget_request.errors, status: :unprocessable_entity }
+        format.html { render(:edit, status: :unprocessable_entity) }
+        format.json { render(json: @budget_request.errors, status: :unprocessable_entity) }
       end
     end
   end
@@ -57,19 +57,20 @@ class BudgetRequestsController < ApplicationController
     @budget_request.destroy
 
     respond_to do |format|
-      format.html { redirect_to budget_requests_url, notice: "Budget request was successfully destroyed." }
-      format.json { head :no_content }
+      format.html { redirect_to(budget_requests_url, notice: "Budget request was successfully destroyed.") }
+      format.json { head(:no_content) }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_budget_request
-      @budget_request = BudgetRequest.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def budget_request_params
-      params.require(:budget_request).permit(:admin_id, :budget_category_id, :is_approved, :value, :description)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_budget_request
+    @budget_request = BudgetRequest.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def budget_request_params
+    params.require(:budget_request).permit(:admin_id, :budget_category_id, :is_approved, :value, :description)
+  end
 end

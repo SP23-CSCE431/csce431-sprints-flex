@@ -25,11 +25,11 @@ class PointCategoriesController < ApplicationController
 
     respond_to do |format|
       if @point_category.save
-        format.html { redirect_to point_category_url(@point_category), notice: "Point category was successfully created." }
-        format.json { render :show, status: :created, location: @point_category }
+        format.html { redirect_to(point_category_url(@point_category), notice: "Point category was successfully created.") }
+        format.json { render(:show, status: :created, location: @point_category) }
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @point_category.errors, status: :unprocessable_entity }
+        format.html { render(:new, status: :unprocessable_entity) }
+        format.json { render(json: @point_category.errors, status: :unprocessable_entity) }
       end
     end
   end
@@ -38,11 +38,11 @@ class PointCategoriesController < ApplicationController
   def update
     respond_to do |format|
       if @point_category.update(point_category_params)
-        format.html { redirect_to point_category_url(@point_category), notice: "Point category was successfully updated." }
-        format.json { render :show, status: :ok, location: @point_category }
+        format.html { redirect_to(point_category_url(@point_category), notice: "Point category was successfully updated.") }
+        format.json { render(:show, status: :ok, location: @point_category) }
       else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @point_category.errors, status: :unprocessable_entity }
+        format.html { render(:edit, status: :unprocessable_entity) }
+        format.json { render(json: @point_category.errors, status: :unprocessable_entity) }
       end
     end
   end
@@ -52,8 +52,8 @@ class PointCategoriesController < ApplicationController
     @point_category.destroy
 
     respond_to do |format|
-      format.html { redirect_to point_categories_url, notice: "Point category was successfully destroyed." }
-      format.json { head :no_content }
+      format.html { redirect_to(point_categories_url, notice: "Point category was successfully destroyed.") }
+      format.json { head(:no_content) }
     end
   end
 
