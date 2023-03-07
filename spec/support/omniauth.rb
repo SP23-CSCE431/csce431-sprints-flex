@@ -12,6 +12,6 @@ OmniAuth.config.mock_auth[:google_oauth2] = OmniAuth::AuthHash.new({
   credentials: {
     token: 'token',
     refresh_token: 'refresh_token',
-    expires_at: Time.now + 1.week
+    expires_at: Time.zone.now + 1.week
   }
 })
