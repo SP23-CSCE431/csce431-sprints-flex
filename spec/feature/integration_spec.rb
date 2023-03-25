@@ -297,3 +297,65 @@ RSpec.describe('Displaying Points by Categories', type: :feature) do
     expect(page.text).to(include('Test Category 1    2'))
   end
 end
+
+RSpec.describe('Help Documentation is available', type: :feature) do
+  # Stub the google oauth by providing fake credentials
+  before do
+    OmniAuth.config.mock_auth[:google_oauth2] = nil
+    OmniAuth.config.add_mock(:google_oauth2, {
+      provider: 'google_oauth2',
+      uid: '123456789',
+      info: {
+        email: 'test@example.com',
+        name: 'Test User'
+      },
+      credentials: {
+        token: 'token',
+        refresh_token: 'refresh_token',
+        expires_at: Time.zone.now + 1.week
+      }
+    })
+
+    # First sign in
+    visit new_admin_session_path
+    click_link 'Sign in with Google'
+  end
+
+  scenario 'Help Link is avaliable' do
+    visit root_path
+    expect(page).to(have_content("Help"))
+  end
+
+  scenario 'Help Link leads to documentation' do
+    click_link 'Help'
+    expect(page).to(have_content('Quick Start Guide'))
+  end
+
+  scenario 'Has "How to create point" section' do
+    expect(page).to(have_content('Adding a New Point'))
+  end
+
+  scenario 'Has "Create a Point Category" section' do
+    expect(page).to(have_content('Creating a Point Category'))
+  end
+
+  scenario 'Has "Adding a New Member" section' do
+    expect(page).to(have_content('Adding a New Member'))
+  end
+
+  scenario 'Has "Approving Points" section' do
+    expect(page).to(have_content('How to Approve Points'))
+  end
+
+  scenario 'Has "Understand Your Points" section' do
+    expect(page).to(have_content('Understand Your Points'))
+  end
+
+  scenario 'Has "Create a Reimbursement Request" section' do
+    expect(page).to(have_content('Create a Reimbursement Request'))
+  end
+
+  scenario 'Has "Approve a Reimbursement Request" section' do
+    expect(page).to(have_content('Approve a Reimbursement Request'))
+  end
+end

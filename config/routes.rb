@@ -2,7 +2,11 @@ Rails.application.routes.draw do
   resources :budget_requests
   resources :budget_categories
   #devise_for :admins
-  resources :points
+  resources :points do
+    collection do
+      get 'help/:first' => 'points#help'
+    end
+  end
   resources :point_categories
   resources :members
 
