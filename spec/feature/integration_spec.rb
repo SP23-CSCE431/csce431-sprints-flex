@@ -332,7 +332,8 @@ RSpec.describe('Help Documentation is available', type: :feature) do
   end
 
   scenario 'Has "How to create point" section' do
-    expect(page).to(have_content('Adding a New Point'))
+    visit help/home
+    expect(page.text).to(include('Adding a New Point'))
   end
 
   scenario 'Has "Create a Point Category" section' do
