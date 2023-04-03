@@ -39,3 +39,6 @@
     <% end %>
   </div>
 </article>
+
+<!--Button to delete all points-->
+<%= link_to 'Delete All Points', delete_points_points_path, data: { turbo_method: :get, turbo_confirm: 'Are you sure?'}, role: 'button' %>

@@ -75,14 +75,22 @@ class PointsController < ApplicationController
     render "points/help/#{params[:first]}"
   end
 
+  def delete_points
+    # Delete all points, will be called from points/delete_points
+    Point.delete_all
+    flash[:notice] = 'All points have been successfully deleted.'
+    redirect_to points_path
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_point
-      @point = Point.find(params[:id])
+        @point = Point.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
     def point_params
       params.require(:point).permit(:admin_id, :point_category_id, :is_approved, :description, :date_attended)
     end
+
 end
