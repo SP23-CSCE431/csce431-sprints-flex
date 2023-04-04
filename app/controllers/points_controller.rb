@@ -1,4 +1,5 @@
 class PointsController < ApplicationController
+  include ApplicationHelper
   before_action :set_point, only: %i[ show edit update destroy ]
 
   # GET /points or /points.json
@@ -77,8 +78,12 @@ class PointsController < ApplicationController
 
   def delete_points
     # Delete all points, will be called from points/delete_points
-    Point.delete_all
-    flash[:notice] = 'All points have been successfully deleted.'
+    if current_admin.role == "Executive"
+      Point.delete_all
+      flash[:notice] = 'All points have been successfully deleted.'
+    else
+      flash[:notice] = 'Permission Denied.'
+    end
     redirect_to points_path
   end
 
