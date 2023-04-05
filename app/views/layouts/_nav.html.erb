@@ -5,17 +5,18 @@
 <aside>
   <nav>
     <ul>
+    <li role="list" dir="rtl">
+      <a href="" aria-haspopup="listbox">Admin</a>
+      <ul role="listbox">
+        <li><%= link_to "Members", members_path %></li>
+        <li><%= link_to "Point Requests", point_reviews_path %></li>
+        <li><%= link_to "Point Categories", point_categories_path %></li>
+        <li><%= link_to "Reimbursement Requests", budget_requests_path %></li>
+        <li><%= link_to "Reimbursement Categories", budget_categories_path %></li>
+      </ul>
+      </li>
       <li><%= link_to "Points", points_path %></li>
       <li><%= link_to "Reimbursements", budget_requests_path %></li>
-      <li role="list" dir="rtl">
-        <a href="" aria-haspopup="listbox">Admin</a>
-        <ul role="listbox">
-          <li><%= link_to "Members", point_categories_path %></li>
-          <li><%= link_to "Point Categories", point_categories_path %></li>
-          <li><%= link_to "Reimbursement Requests", budget_requests_path %></li>
-          <li><%= link_to "Reimbursement Categories", budget_categories_path %></li>
-        </ul>
-      </li>
       <li role="list" dir="rtl">
         <a href="" aria-haspopup="listbox">
           <img src=<%= current_admin.avatar_url %> alt=<%= current_admin.full_name %> class="avatar" width="30px" height="30px">
