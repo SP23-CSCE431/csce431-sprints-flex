@@ -6,8 +6,12 @@ class PointsController < ApplicationController
   # Also, query the signed in user's total points and point total category
   def index
     @user_id = current_admin.id
-    @points = Point.where(admin_id: @user_id).where.not(is_approved: nil)
+
+    @points = Point.paginate(page: params[:page], per_page: 5).where(admin_id: @user_id).where.not(is_approved: nil)
+    @points_count = Point.where(admin_id: @user_id).where.not(is_approved: nil).count
+
     @pending_points = Point.where(admin_id: @user_id, is_approved: nil)
+    
     @user_total_points = Point.where(admin_id: @user_id, is_approved: true).count
     @num_per_category = Point.joins(:point_category).group(:name).where(admin_id: @user_id, is_approved: true).count
   end
@@ -33,7 +37,7 @@ class PointsController < ApplicationController
 
     @point = Point.new(point_params)
     @point.admin_id = @user_id
-    @point.is_approved = true
+    @point.is_approved = nil
 
     respond_to do |format|
       if @point.save
