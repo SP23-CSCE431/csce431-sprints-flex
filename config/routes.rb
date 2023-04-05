@@ -2,7 +2,15 @@ Rails.application.routes.draw do
   resources :budget_requests
   resources :budget_categories
   #devise_for :admins
-  resources :points
+
+
+  # This is the route that calls the delete_points function
+  # delete 'points/delete_points', to: 'points#delete_points', as: 'delete_points'
+  resources :points do
+    collection do
+      get 'delete_points'
+    end
+  end
   #   collection do
   #     get 'help/:first' => 'points#help'
   #   end
