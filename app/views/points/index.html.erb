@@ -23,11 +23,17 @@
 <% end %>
 
 <article id="verified-points">
+  <header>Your Points</header>
   <% if @points.count == 0 %>
     <span class="helper-text block" style="text-align: center">No verified points yet! <%= link_to "Ready to submit points?", new_point_path %></span>
   <% else %>
   <% @points.each do |point| %>
     <%= render point %>
+  <% end %>
+  <% if @points_count > 5 %>
+  <footer>
+  <%= will_paginate @points %>
+  </footer>
   <% end %>
 </article>
 <% end %>
