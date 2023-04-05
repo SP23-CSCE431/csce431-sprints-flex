@@ -1,0 +1,2 @@
+module PointReviewsHelper
+end

@@ -15,8 +15,13 @@ Rails.application.routes.draw do
   #     get 'help/:first' => 'points#help'
   #   end
   # end
-  resources :point_categories
-  resources :members
+  resources :point_categories, path: 'admin/points/categories'
+  resources :members, path: 'admin/members'
+  resources :point_reviews, path: 'admin/points'
+
+  put '/admin/points/:point_id/approve', to: 'point_reviews#approve', as: 'approve_point_review'
+  put '/admin/points/:point_id/deny', to: 'point_reviews#deny', as: 'deny_point_review'
+
   get 'help/:first' => 'help#help'
 
   root 'points#index'
