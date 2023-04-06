@@ -1,5 +1,4 @@
 class PointReviewsController < ApplicationController
-    before_action :set_point, only: %i[ approve deny ]
 
     def index
         @user_id = current_admin.id
@@ -9,13 +8,13 @@ class PointReviewsController < ApplicationController
 
     def approve
         pending_point = Point.find(params[:point_id])
-        pending_point.point.update(is_approved: true)
+        pending_point.update(is_approved: true)
         redirect_to point_reviews_path
     end    
 
     def deny
         pending_point = Point.find(params[:point_id])
-        pending_point.point.update(is_approved: false)
+        pending_point.update(is_approved: false)
         redirect_to point_reviews_path
     end    
 end

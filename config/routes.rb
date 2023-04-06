@@ -5,7 +5,6 @@ Rails.application.routes.draw do
 
 
   # This is the route that calls the delete_points function
-  # delete 'points/delete_points', to: 'points#delete_points', as: 'delete_points'
   resources :points do
     collection do
       get 'delete_points'
@@ -17,10 +16,13 @@ Rails.application.routes.draw do
   # end
   resources :point_categories, path: 'admin/points/categories'
   resources :members, path: 'admin/members'
-  resources :point_reviews, path: 'admin/points'
+  resources :point_reviews, path: 'admin/points' do
+    collection do
+      get '/admin/points/:point_id/approve', to: 'point_reviews#approve', as: 'approve_point_review'
+      get '/admin/points/:point_id/deny', to: 'point_reviews#deny', as: 'deny_point_review'
 
-  put '/admin/points/:point_id/approve', to: 'point_reviews#approve', as: 'approve_point_review'
-  put '/admin/points/:point_id/deny', to: 'point_reviews#deny', as: 'deny_point_review'
+    end
+  end
 
   get 'help/:first' => 'help#help'
 
