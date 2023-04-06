@@ -11,22 +11,13 @@
   </div>
 </article>
 
-<%= link_to "Add Points", new_point_path, role: "button" %>
+<%= link_to "Add Points", new_point_path, role: "button", style: 'width:100%' %>
 
+<%# Shows point totals by category %>
 <% if @pending_points.count != 0 %>
 <article id="pending-points">
   <header>Awaiting Review</header>
   <% @pending_points.each do |point| %>
-    <%= render point %>
-  <% end %>
-</article>
-<% end %>
-
-<article id="verified-points">
-  <% if @points.count == 0 %>
-    <span class="helper-text block" style="text-align: center">No verified points yet! <%= link_to "Ready to submit points?", new_point_path %></span>
-  <% else %>
-  <% @points.each do |point| %>
     <%= render point %>
   <% end %>
 </article>
@@ -39,3 +30,13 @@
     <% end %>
   </div>
 </article>
+
+<article id="verified-points">
+  <% if @points.count == 0 %>
+    <span class="helper-text block" style="text-align: center">No verified points yet! <%= link_to "Ready to submit points?", new_point_path %></span>
+  <% else %>
+  <% @points.each do |point| %>
+    <%= render point %>
+  <% end %>
+</article>
+<% end %>
