@@ -32,11 +32,30 @@
 </article>
 
 <article id="verified-points">
+  <header>Your Points</header>
   <% if @points.count == 0 %>
     <span class="helper-text block" style="text-align: center">No verified points yet! <%= link_to "Ready to submit points?", new_point_path %></span>
   <% else %>
   <% @points.each do |point| %>
     <%= render point %>
   <% end %>
+  <% if @points_count > 5 %>
+  <footer>
+  <%= will_paginate @points %>
+  </footer>
+  <% end %>
 </article>
+<% end %>
+
+<article>
+  <div class="block-space-between">
+    <% @num_per_category.each do |point| %>
+      <div><strong><%= point.first %> &emsp;&emsp; <%= point.last %></strong></div>
+    <% end %>
+  </div>
+</article>
+
+<!--Button to delete all points-->
+<% if current_admin.role == "Executive" %>
+  <%= link_to 'Delete All Points', delete_points_points_path, data: { turbo_method: :get, turbo_confirm: 'Are you sure?'}, role: 'button' %>
 <% end %>

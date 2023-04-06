@@ -1,4 +1,4 @@
-/*  Overrides */
+/*  PicoCSS Overrides */
 
 html[aria-busy='true']:before {
   display: none !important;
@@ -40,6 +40,96 @@ html[aria-busy='true']:before {
   --form-element-focus-color: var(--primary-focus) !important;
   --switch-color: var(--primary-inverse !important);
   --switch-checked-background-color: var(--primary) !important;
+  --form-label-font-weight: 600 !important;
+  --border-radius: 0.4rem !important;
+}
+
+@media (min-width: 1200px) {
+  .container {
+    min-width: 90% !important;
+  }
+}
+
+table tr,
+td [role='button'],
+button,
+input[type='button'],
+input[type='reset'],
+input[type='submit'] {
+  padding: calc(var(--form-element-spacing-vertical) - 8px)
+    calc(var(--form-element-spacing-horizontal) - 4px);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 800 !important;
+}
+
+[role='link'],
+a,
+input[type='submit'] {
+  font-weight: 600 !important;
+}
+
+article header {
+  font-weight: 700;
+  background-color: transparent !important;
+  border: none !important;
+}
+
+thead tr th {
+  font-weight: 700 !important;
+}
+
+/* Login */
+
+.login {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translateX(-50%) translateY(-50%);
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  padding: 355px !important;
+}
+
+.login article {
+  width: 500px;
+}
+
+.login article header {
+  margin-bottom: 0;
+}
+
+.login [role='button'] {
+  width: 100%;
+}
+
+/* Pagination */
+
+.pagination a {
+  padding: 8px 18px;
+  border-radius: 100px;
+  text-align: center;
+  display: inline-block;
+  background-color: var(--secondary);
+  color: var(--contrast);
+}
+
+.pagination a:hover {
+  background-color: var(--secondary-hover);
+}
+
+.pagination .current {
+  padding: 8px 18px;
+  border-radius: 100px;
+  text-align: center;
+  font-style: initial;
+  display: inline-block;
 }
 
 /* Typography */
@@ -90,9 +180,20 @@ html[aria-busy='true']:before {
   margin-top: 0;
   background-image: linear-gradient(
     220deg,
-    rgba(255, 206, 149, 0.38) 30.95%,
+    rgb(165 255 255) 30.95%,
     rgba(255, 255, 255, 0) 30.95%
   );
+  font-weight: 700;
+}
+
+@media only screen and (prefers-color-scheme: dark) {
+  .total-points {
+    background-image: linear-gradient(
+      220deg,
+      rgb(0 148 148) 30.95%,
+      rgba(255, 255, 255, 0) 30.95%
+    ) !important;
+  }
 }
 
 /* Grid 

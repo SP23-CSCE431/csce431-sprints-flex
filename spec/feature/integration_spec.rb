@@ -127,6 +127,54 @@ RSpec.describe('Creating a Point Category', type: :feature) do
   end
 end
 
+RSpec.describe('Deleting All Points', type: :feature) do
+  # Stub the google oauth by providing fake credentials
+  before do
+    OmniAuth.config.mock_auth[:google_oauth2] = nil
+    OmniAuth.config.add_mock(:google_oauth2, {
+      provider: 'google_oauth2',
+      uid: '123456789',
+      info: {
+        email: 'test@example.com',
+        name: 'Test User'
+      },
+      credentials: {
+        token: 'token',
+        refresh_token: 'refresh_token',
+        expires_at: Time.zone.now + 1.week
+      }
+    })
+
+    # First sign in
+    visit new_admin_session_path
+    click_link 'Sign in with Google'
+  end
+
+  scenario 'valid inputs' do
+
+    visit new_point_path
+    select "Test Category 1", from: "point[point_category_id]"
+    point_category_select = find('#point_point_category_id')
+    point_category_select.set('Test Category 1')
+    fill_in "point[date_attended]", with: '2023-10-10'
+    fill_in "point[description]", with: 'Test'
+    click_on 'Create Point'
+
+    visit new_point_path
+    select "Test Category 1", from: "point[point_category_id]"
+    point_category_select = find('#point_point_category_id')
+    point_category_select.set('Test Category 1')
+    fill_in "point[date_attended]", with: '2023-10-10'
+    fill_in "point[description]", with: 'Test 2'
+    click_on 'Create Point'
+
+    visit points_path
+    click_on 'Delete All Points'
+    expect(page).to(have_content('All points have been successfully deleted.'))
+  end
+
+end
+
 RSpec.describe('Creating a Point', type: :feature) do
   # Stub the google oauth by providing fake credentials
   before do
