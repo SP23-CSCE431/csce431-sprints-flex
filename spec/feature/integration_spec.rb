@@ -409,7 +409,7 @@ RSpec.describe('Help Documentation is available', type: :feature) do
   end
 end
 
-RSpec.describe('Help Documentation is available', type: :feature) do
+RSpec.describe('Budget Reimbursment Review', type: :feature) do
   # Stub the google oauth by providing fake credentials
   before do
     OmniAuth.config.mock_auth[:google_oauth2] = nil
@@ -432,9 +432,34 @@ RSpec.describe('Help Documentation is available', type: :feature) do
     click_link 'Sign in with Google'
   end
 
-  scenario 'Page exists' do
-    visit admin/budget
+  scenario 'Page Exists' do
+    visit budget_reviews_path
     expect(page).to(have_content('Budget Reimbursement Requests'))
   end
-  
+
+  scenario 'New Budget Request Arrives' do
+    visit new_budget_request_path
+    select "Test Category", from: "budget_request[budget_category_id]"
+    fill_in "budget_request[value]", with: 2
+    fill_in "budget_request[description]", with: 'Test'
+    click_on 'Create Budget request'
+    visit budget_reviews_path
+    expect(page).to(have_content('2'))
+    expect(page).to(have_content('Test'))
+  end
+
+  scenario 'Approve Request' do
+    visit new_budget_request_path
+    select "Test Category", from: "budget_request[budget_category_id]"
+    fill_in "budget_request[value]", with: 2
+    fill_in "budget_request[description]", with: 'Test'
+    click_on 'Create Budget request'
+    visit budget_reviews_path
+    click_link 'Approve'
+    expect(page).not_to(have_content('2'))
+    expect(page).not_to(have_content('Test'))
+    visit budget_requests_path
+    expect(page).to(have_content('2'))
+    expect(page).to(have_content('Test'))
+  end
 end

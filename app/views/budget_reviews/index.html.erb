@@ -10,6 +10,7 @@
     <tr>
       <th scope="col">From</th>
       <th scope="col">Category</th>
+      <th scope="col">Value</th>
       <th scope="col">Description</th>
       <th scope="col"></th>
       <th scope="col"></th>
@@ -21,11 +22,12 @@
     <tr>
         <td><strong><%= pending_budget.admin.full_name %></strong></td>
         <td><%= pending_budget.budget_category.name %></td>
+        <td><%= pending_budget.value %></td>
         <td><%= pending_budget.description %></td>
         <%= pending_budget.id %>
         <td><a href="#">More</a></td>
-        <td><%= link_to 'Approve', approve_budget_review_path(pending_budget.id), method: :put, role: 'button' %></td>
-        <td><%= link_to 'Deny', deny_budget_review_path(pending_budget.id), method: :put, role: 'button', class: 'secondary outline' %></td>
+        <td><%= link_to 'Approve', approve_budget_review_budget_reviews_path(pending_budget.id), method: :get, role: 'button' %></td>
+        <td><%= link_to 'Deny', deny_budget_review_budget_reviews_path(pending_budget.id), method: :get, role: 'button', class: 'secondary outline' %></td>
     </tr>
     <% end %>
 </tbody>

@@ -20,10 +20,15 @@ Rails.application.routes.draw do
     collection do
       get '/admin/points/:point_id/approve', to: 'point_reviews#approve', as: 'approve_point_review'
       get '/admin/points/:point_id/deny', to: 'point_reviews#deny', as: 'deny_point_review'
-  resources :budget_reviews, path: 'admin/budget'
+    end
+  end
+  resources :budget_reviews, path: 'admin/budget' do
+    collection do
+      get '/admin/budget/:budget_request_id/approve', to: 'budget_reviews#approve', as: 'approve_budget_review'
+      get '/admin/budget/:budget_request_id/deny', to: 'budget_reviews#deny', as: 'deny_budget_review'
+    end
+  end
 
-  put '/admin/points/:point_id/approve', to: 'point_reviews#approve', as: 'approve_point_review'
-  put '/admin/points/:point_id/deny', to: 'point_reviews#deny', as: 'deny_point_review'
 
   get 'help/:first' => 'help#help'
 
