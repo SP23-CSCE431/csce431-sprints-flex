@@ -1,0 +1,38 @@
+<% if notice %>
+  <p style="color: green"><%= notice %></p>
+<% end %>
+
+<h1>Budget Reimbursement Requests</h1>
+
+<article>
+<table role="grid">
+  <thead>
+    <tr>
+      <th scope="col">From</th>
+      <th scope="col">Category</th>
+      <th scope="col">Description</th>
+      <th scope="col"></th>
+      <th scope="col"></th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @pending_budgets.each do |pending_budget| %>
+    <tr>
+        <td><strong><%= pending_budget.admin.full_name %></strong></td>
+        <td><%= pending_budget.budget_category.name %></td>
+        <td><%= pending_budget.description %></td>
+        <%= pending_budget.id %>
+        <td><a href="#">More</a></td>
+        <td><%= link_to 'Approve', approve_budget_review_path(pending_budget.id), method: :put, role: 'button' %></td>
+        <td><%= link_to 'Deny', deny_budget_review_path(pending_budget.id), method: :put, role: 'button', class: 'secondary outline' %></td>
+    </tr>
+    <% end %>
+</tbody>
+</table>
+<% if @pending_budgets_count > 10 %>
+<footer>
+<%= will_paginate @pending_budgets %>
+</footer>
+<% end %>
+</article>

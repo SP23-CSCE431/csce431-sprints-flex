@@ -408,3 +408,33 @@ RSpec.describe('Help Documentation is available', type: :feature) do
     expect(page).to(have_content('Approve a Reimbursement Request'))
   end
 end
+
+RSpec.describe('Help Documentation is available', type: :feature) do
+  # Stub the google oauth by providing fake credentials
+  before do
+    OmniAuth.config.mock_auth[:google_oauth2] = nil
+    OmniAuth.config.add_mock(:google_oauth2, {
+      provider: 'google_oauth2',
+      uid: '123456789',
+      info: {
+        email: 'test@example.com',
+        name: 'Test User'
+      },
+      credentials: {
+        token: 'token',
+        refresh_token: 'refresh_token',
+        expires_at: Time.zone.now + 1.week
+      }
+    })
+
+    # First sign in
+    visit new_admin_session_path
+    click_link 'Sign in with Google'
+  end
+
+  scenario 'Page exists' do
+    visit admin/budget
+    expect(page).to(have_content('Budget Reimbursement Requests'))
+  end
+  
+end

@@ -18,9 +18,14 @@ Rails.application.routes.draw do
   resources :point_categories, path: 'admin/points/categories'
   resources :members, path: 'admin/members'
   resources :point_reviews, path: 'admin/points'
+  resources :budget_reviews, path: 'admin/budget'
 
   put '/admin/points/:point_id/approve', to: 'point_reviews#approve', as: 'approve_point_review'
   put '/admin/points/:point_id/deny', to: 'point_reviews#deny', as: 'deny_point_review'
+
+  get '/admin/budget/:budget_request_id/approve', to: 'budget_reviews#approve', as: 'approve_budget_review'
+  get '/admin/budget/:budget_request_id/deny', to: 'budget_reviews#deny', as: 'deny_budget_review'
+
 
   get 'help/:first' => 'help#help'
 
