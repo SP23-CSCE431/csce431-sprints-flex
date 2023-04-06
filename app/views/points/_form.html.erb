@@ -17,6 +17,17 @@
   </div>
 
   <div>
+    <%= form.label :photo %>
+    <a href="#" class="secondary" role="button" 
+    onclick="window.open('https://drive.google.com/drive/u/0/my-drive', 
+      'newwindow', 
+      'width=500,
+      height=700'); 
+      return false;">Open Google Drive</a>
+    <%= form.text_field :photo %>
+  </div>
+
+  <div>
     <%= form.label :description, style: "display: block" %>
     <%= form.text_field :description %>
   </div>

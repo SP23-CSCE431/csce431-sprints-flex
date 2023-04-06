@@ -127,6 +127,54 @@ RSpec.describe('Creating a Point Category', type: :feature) do
   end
 end
 
+RSpec.describe('Deleting All Points', type: :feature) do
+  # Stub the google oauth by providing fake credentials
+  before do
+    OmniAuth.config.mock_auth[:google_oauth2] = nil
+    OmniAuth.config.add_mock(:google_oauth2, {
+      provider: 'google_oauth2',
+      uid: '123456789',
+      info: {
+        email: 'test@example.com',
+        name: 'Test User'
+      },
+      credentials: {
+        token: 'token',
+        refresh_token: 'refresh_token',
+        expires_at: Time.zone.now + 1.week
+      }
+    })
+
+    # First sign in
+    visit new_admin_session_path
+    click_link 'Sign in with Google'
+  end
+
+  scenario 'valid inputs' do
+
+    visit new_point_path
+    select "Test Category 1", from: "point[point_category_id]"
+    point_category_select = find('#point_point_category_id')
+    point_category_select.set('Test Category 1')
+    fill_in "point[date_attended]", with: '2023-10-10'
+    fill_in "point[description]", with: 'Test'
+    click_on 'Create Point'
+
+    visit new_point_path
+    select "Test Category 1", from: "point[point_category_id]"
+    point_category_select = find('#point_point_category_id')
+    point_category_select.set('Test Category 1')
+    fill_in "point[date_attended]", with: '2023-10-10'
+    fill_in "point[description]", with: 'Test 2'
+    click_on 'Create Point'
+
+    visit points_path
+    click_on 'Delete All Points'
+    expect(page).to(have_content('All points have been successfully deleted.'))
+  end
+
+end
+
 RSpec.describe('Creating a Point', type: :feature) do
   # Stub the google oauth by providing fake credentials
   before do
@@ -358,5 +406,60 @@ RSpec.describe('Help Documentation is available', type: :feature) do
 
   scenario 'Has "Approve a Reimbursement Request" section' do
     expect(page).to(have_content('Approve a Reimbursement Request'))
+  end
+end
+
+RSpec.describe('Budget Reimbursment Review', type: :feature) do
+  # Stub the google oauth by providing fake credentials
+  before do
+    OmniAuth.config.mock_auth[:google_oauth2] = nil
+    OmniAuth.config.add_mock(:google_oauth2, {
+      provider: 'google_oauth2',
+      uid: '123456789',
+      info: {
+        email: 'test@example.com',
+        name: 'Test User'
+      },
+      credentials: {
+        token: 'token',
+        refresh_token: 'refresh_token',
+        expires_at: Time.zone.now + 1.week
+      }
+    })
+
+    # First sign in
+    visit new_admin_session_path
+    click_link 'Sign in with Google'
+  end
+
+  scenario 'Page Exists' do
+    visit budget_reviews_path
+    expect(page).to(have_content('Budget Reimbursement Requests'))
+  end
+
+  scenario 'New Budget Request Arrives' do
+    visit new_budget_request_path
+    select "Test Category", from: "budget_request[budget_category_id]"
+    fill_in "budget_request[value]", with: 2
+    fill_in "budget_request[description]", with: 'Test'
+    click_on 'Create Budget request'
+    visit budget_reviews_path
+    expect(page).to(have_content('2'))
+    expect(page).to(have_content('Test'))
+  end
+
+  scenario 'Approve Request' do
+    visit new_budget_request_path
+    select "Test Category", from: "budget_request[budget_category_id]"
+    fill_in "budget_request[value]", with: 2
+    fill_in "budget_request[description]", with: 'Test'
+    click_on 'Create Budget request'
+    visit budget_reviews_path
+    click_link 'Approve'
+    expect(page).not_to(have_content('2'))
+    expect(page).not_to(have_content('Test'))
+    visit budget_requests_path
+    expect(page).to(have_content('2'))
+    expect(page).to(have_content('Test'))
   end
 end

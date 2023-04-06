@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <title>FLEX</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -19,21 +19,22 @@
 
   <body>
     <div class="container" style="margin-top: 30px">
-        <div class="row">
-          <div class="col col-span-4">
-            <% if current_admin %>
-            <%= render partial: 'layouts/nav' %>
-            <% end %>
-          </div>
-          <div class="col col-span-8">
-              <% if flash.any? %>
-                <% flash.each do |key, value| -%>
-                  <section class="flash flash__<%= key %>"><%= value.html_safe %></section>
-                <% end -%>
-              <% end %>
-              <%= yield %>
-          </div>
-        </div>
+    <% if current_admin %>
+    <div class="row">
+      <div class="col col-span-4">
+      <%= render partial: 'layouts/nav' %>
       </div>
+      <div class="col col-span-8">        
+      <% if flash.any? %>
+        <% flash.each do |key, value| -%>
+          <section class="flash flash__<%= key %>"><%= value.html_safe %></section>
+        <% end -%>
+      <% end %>
+      <%= yield %>
+    </div>
+    <% else %>
+    <%= yield %>
+    <% end %>
+    </div>
   </body>
 </html>
