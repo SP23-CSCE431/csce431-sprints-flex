@@ -1,4 +1,5 @@
 class PointsController < ApplicationController
+  include ApplicationHelper
   before_action :set_point, only: %i[ show edit update destroy ]
 
   # GET /points or /points.json
@@ -6,8 +7,12 @@ class PointsController < ApplicationController
   # Also, query the signed in user's total points and point total category
   def index
     @user_id = current_admin.id
-    @points = Point.where(admin_id: @user_id).where.not(is_approved: nil)
+
+    @points = Point.paginate(page: params[:page], per_page: 5).where(admin_id: @user_id).where.not(is_approved: nil)
+    @points_count = Point.where(admin_id: @user_id).where.not(is_approved: nil).count
+
     @pending_points = Point.where(admin_id: @user_id, is_approved: nil)
+    
     @user_total_points = Point.where(admin_id: @user_id, is_approved: true).count
     @num_per_category = Point.joins(:point_category).group(:name).where(admin_id: @user_id, is_approved: true).count
   end
@@ -33,7 +38,7 @@ class PointsController < ApplicationController
 
     @point = Point.new(point_params)
     @point.admin_id = @user_id
-    @point.is_approved = true
+    @point.is_approved = nil
 
     respond_to do |format|
       if @point.save
@@ -71,14 +76,30 @@ class PointsController < ApplicationController
     end
   end
 
+  def help
+    render "points/help/#{params[:first]}"
+  end
+
+  def delete_points
+    # Delete all points, will be called from points/delete_points
+    if current_admin.role == "Executive"
+      Point.delete_all
+      flash[:notice] = 'All points have been successfully deleted.'
+    else
+      flash[:notice] = 'Permission Denied.'
+    end
+    redirect_to points_path
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_point
-      @point = Point.find(params[:id])
+        @point = Point.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
     def point_params
       params.require(:point).permit(:admin_id, :point_category_id, :is_approved, :description, :date_attended)
     end
+
 end

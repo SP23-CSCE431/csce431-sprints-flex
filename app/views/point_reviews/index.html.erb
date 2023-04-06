@@ -1,0 +1,40 @@
+<% if notice %>
+  <p style="color: green"><%= notice %></p>
+<% end %>
+
+<h1>Point Requests</h1>
+
+<article>
+<table role="grid">
+  <thead>
+    <tr>
+      <th scope="col">From</th>
+      <th scope="col">Category</th>
+      <th scope="col">Photo</th>
+      <th scope="col">Description</th>
+      <th scope="col"></th>
+      <th scope="col"></th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @pending_points.each do |pending_point| %>
+    <tr>
+        <td><strong><%= pending_point.admin.full_name %></strong></td>
+        <td><%= pending_point.point_category.name %></td>
+        <td><%= pending_point.photo %></td>
+        <td><%= pending_point.description %></td>
+        <%= pending_point.id %>
+        <td><a href="#">More</a></td>
+        <td><%= link_to 'Approve', approve_point_review_point_reviews_path(pending_point.id), method: :get, role: 'button' %></td>
+        <td><%= link_to 'Deny', deny_point_review_point_reviews_path(pending_point.id), method: :get, role: 'button', class: 'secondary outline' %></td>
+    </tr>
+    <% end %>
+</tbody>
+</table>
+<% if @pending_points_count > 10 %>
+<footer>
+<%= will_paginate @pending_points %>
+</footer>
+<% end %>
+</article>
