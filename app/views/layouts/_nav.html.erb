@@ -5,6 +5,7 @@
 <aside>
   <nav>
     <ul>
+    <% if current_admin.role == "Executive" || current_admin.role == "Leader" %>
     <li role="list" dir="rtl">
       <a href="" aria-haspopup="listbox">Admin</a>
       <ul role="listbox">
@@ -15,6 +16,7 @@
         <li><%= link_to "Reimbursement Categories", budget_categories_path %></li>
       </ul>
       </li>
+    <% end %>
       <li><%= link_to "Points", points_path %></li>
       <li><%= link_to "Reimbursements", budget_requests_path %></li>
       <li role="list" dir="rtl">
