@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :budget_requests
+  
   resources :budget_categories
   #devise_for :admins
 
@@ -10,6 +10,14 @@ Rails.application.routes.draw do
       get 'delete_points'
     end
   end
+  # This is the route that calls the delete_requests function
+  # delete 'budget_requests/delete_requests', to: 'budget_requests#delete_requests', as: 'delete_requests'
+  resources :budget_requests do
+    collection do
+      get 'delete_requests'
+    end
+  end
+
   #   collection do
   #     get 'help/:first' => 'points#help'
   #   end

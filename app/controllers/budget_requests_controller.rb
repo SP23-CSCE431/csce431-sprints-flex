@@ -67,6 +67,17 @@ class BudgetRequestsController < ApplicationController
     end
   end
 
+  def delete_requests
+    # Delete all requests, will be called from requests
+    if current_admin.role == "Executive"
+      BudgetRequest.delete_all
+      flash[:notice] = 'All reimbursement requests have been successfully deleted.'
+    else
+      flash[:notice] = 'Permission Denied.'
+    end
+    redirect_to budget_requests_path
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
