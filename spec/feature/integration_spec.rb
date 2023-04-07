@@ -380,31 +380,37 @@ RSpec.describe('Help Documentation is available', type: :feature) do
   end
 
   scenario 'Has "How to create point" section' do
-    visit help/home
+    visit help_index_path
     expect(page.text).to(include('Adding a New Point'))
   end
 
   scenario 'Has "Create a Point Category" section' do
+    visit help_index_path
     expect(page).to(have_content('Creating a Point Category'))
   end
 
   scenario 'Has "Adding a New Member" section' do
+    visit help_index_path
     expect(page).to(have_content('Adding a New Member'))
   end
 
   scenario 'Has "Approving Points" section' do
+    visit help_index_path
     expect(page).to(have_content('How to Approve Points'))
   end
 
   scenario 'Has "Understand Your Points" section' do
+    visit help_index_path
     expect(page).to(have_content('Understand Your Points'))
   end
 
   scenario 'Has "Create a Reimbursement Request" section' do
+    visit help_index_path
     expect(page).to(have_content('Create a Reimbursement Request'))
   end
 
   scenario 'Has "Approve a Reimbursement Request" section' do
+    visit help_index_path
     expect(page).to(have_content('Approve a Reimbursement Request'))
   end
 end
@@ -456,10 +462,21 @@ RSpec.describe('Budget Reimbursment Review', type: :feature) do
     click_on 'Create Budget request'
     visit budget_reviews_path
     click_link 'Approve'
-    expect(page).not_to(have_content('2'))
-    expect(page).not_to(have_content('Test'))
-    visit budget_requests_path
-    expect(page).to(have_content('2'))
-    expect(page).to(have_content('Test'))
+
+    request = BudgetRequest.find_by(admin_id: 5)
+    expect(request).to(have_attributes(is_approved: true))
+  end
+
+  scenario 'Deny Request' do
+    visit new_budget_request_path
+    select "Test Category", from: "budget_request[budget_category_id]"
+    fill_in "budget_request[value]", with: 2
+    fill_in "budget_request[description]", with: 'Test'
+    click_on 'Create Budget request'
+    visit budget_reviews_path
+    click_link 'Deny'
+    
+    request = BudgetRequest.find_by(admin_id: 5)
+    expect(request).to(have_attributes(is_approved: false))
   end
 end

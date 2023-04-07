@@ -29,8 +29,7 @@ Rails.application.routes.draw do
     end
   end
 
-
-  get 'help/:first' => 'help#help'
+  resources :help, only: [:index]
 
   root 'points#index'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
