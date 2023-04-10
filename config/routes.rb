@@ -18,12 +18,8 @@ Rails.application.routes.draw do
     end
   end
 
-  #   collection do
-  #     get 'help/:first' => 'points#help'
-  #   end
-  # end
   resources :point_categories, path: 'admin/points/categories'
-  resources :members, path: 'admin/members'
+  #resources :members, path: 'members'
   resources :point_reviews, path: 'admin/points' do
     collection do
       get '/admin/points/:point_id/approve', to: 'point_reviews#approve', as: 'approve_point_review'
@@ -43,6 +39,7 @@ Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   #root to: 'dashboards#show'
+  resources :admins, path: 'admin/members'
   devise_for :admins, controllers: { omniauth_callbacks: 'admins/omniauth_callbacks' }
   devise_scope :admin do
     get 'admins/sign_in', to: 'admins/sessions#new', as: :new_admin_session
