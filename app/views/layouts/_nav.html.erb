@@ -30,19 +30,5 @@
         </ul>
       </li>
     </ul>
-    <li><%= link_to "Points", points_path %></li>
-    <li><%= link_to "Reimbursements", budget_requests_path %></li>
-    <li role="list" dir="rtl">
-      <a href="" aria-haspopup="listbox">
-        <img src=<%= current_admin.avatar_url %> alt=<%= current_admin.full_name %> class="avatar" width="30px" height="30px">
-        <%= current_admin.full_name %>
-      </a>
-      <ul role="listbox">
-        <li><a href="#">Settings</a></li>
-        <li><%= link_to "Help", 'help/home' %></li>
-        <li><%= link_to "Sign Out", destroy_admin_session_path %></li>
-      </ul>
-    </li>
-  </ul>
   </nav>
 </aside>
