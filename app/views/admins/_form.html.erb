@@ -28,7 +28,7 @@
 
   <div>
     <%= form.label :role, style: "display: block" %>
-    <% if @admin.role == 'Executive' %> 
+    <% if current_admin.role == 'Executive' %> 
       <%= form.select :role, options_for_select([['Member', 'Member'], ['Leader', 'Leader'], ['Executive', 'Executive']]) %>
     <% else %>
       <%= form.select :role, options_for_select([['Member', 'Member'], ['Leader', 'Leader']]) %>

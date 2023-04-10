@@ -2,15 +2,24 @@
 
 <h1>Members</h1>
 
-<div id="members">
-  <% @admins.each do |admin| %>
-    <%= render admin %>
-    <p>
-      <%= link_to "Show this member", admin %>
-    </p>
-  <% end %>
-</div>
+<%= link_to "New Member", new_admin_path, role: "button" %>
 
-<%= link_to "New Member", new_admin_path %>
-<br />
-<%= link_to "Back to points", points_path %>
+<article id="admin">
+  <table>
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Phone</th>
+        <th scope="col">Role</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @admins.each do |admin| %>
+        <%= render admin %>
+      <% end %>  
+    </tbody>
+  </table>
+</article>
+
