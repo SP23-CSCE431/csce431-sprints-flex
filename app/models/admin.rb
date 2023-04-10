@@ -11,7 +11,11 @@ class Admin < ApplicationRecord
 
   def self.from_google(email:, full_name:, uid:, avatar_url:)
     return nil unless email =~ /@gmail.com || @tamu.edu\z/
-    create_with(uid: uid, full_name: full_name, avatar_url: avatar_url).find_or_create_by!(email: email)
+    begin
+      create_with(uid: uid, full_name: full_name, avatar_url: avatar_url).find_or_create_by!(email: email)
+    rescue ActiveRecord::RecordInvalid
+      return nil
+    end
   end
 
 end

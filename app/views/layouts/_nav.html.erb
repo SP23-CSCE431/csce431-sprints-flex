@@ -14,8 +14,10 @@
         <li><%= link_to "Reimbursement Requests", budget_reviews_path %></li>
         <li><%= link_to "Reimbursement Categories", budget_categories_path %></li>
         <!-- Delete all Points and Reimbursement Reqeusts -->
-        <li><%= link_to 'Delete All Points', delete_points_points_path, data: { turbo_method: :get, turbo_confirm: 'Are you sure?'}, style: "color: #D32F2F;" %></li>
-        <li><%= link_to 'Delete All Reimbursement Requests', delete_requests_budget_requests_path, data: { turbo_method: :get, turbo_confirm: 'Are you sure?'}, style: "color: #D32F2F;" %></li>
+        <% if current_admin.role == "Executive" %>
+          <li><%= link_to 'Delete All Points', delete_points_points_path, data: { turbo_method: :get, turbo_confirm: 'Are you sure?'}, style: "color: #D32F2F;" %></li>
+          <li><%= link_to 'Delete All Reimbursement Requests', delete_requests_budget_requests_path, data: { turbo_method: :get, turbo_confirm: 'Are you sure?'}, style: "color: #D32F2F;" %></li>
+        <% end %>
       </ul>
       </li>
     <% end %>
