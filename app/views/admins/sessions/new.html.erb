@@ -1,2 +1,14 @@
-<h2>You're Logged out! Log in below</h2>
-<%= link_to "Sign in with Google", admin_google_oauth2_omniauth_authorize_path %>
+<div class="login">
+    <%= render partial: 'layouts/logo' %>
+    <% if flash.any? %>
+    <% flash.each do |key, value| -%>
+      <article class="notice">
+        <%= value.html_safe %>
+      </article>
+    <% end -%>
+    <% end %>
+    <article>
+    <header>Sign in with @tamu.edu to continue</header>
+    <%= link_to "Sign in with Google", admin_google_oauth2_omniauth_authorize_path, role: 'button' %>
+    </article>      
+</div>

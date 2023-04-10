@@ -1,9 +1,8 @@
-<div style="margin-top: -10px; margin-bottom: 30px">
-  <%= render partial: 'layouts/logo' %>
-</div>
-
 <aside>
   <nav>
+    <div style="margin-top: -10px; margin-bottom: 30px">
+      <%= render partial: 'layouts/logo' %>
+    </div>
     <ul>
     <% if current_admin.role == "Executive" || current_admin.role == "Leader" %>
     <li role="list" dir="rtl">

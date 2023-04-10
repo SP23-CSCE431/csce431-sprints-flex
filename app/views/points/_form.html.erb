@@ -18,18 +18,16 @@
 
   <div>
     <%= form.label :photo %>
-    <a href="#" class="secondary" role="button" 
-    onclick="window.open('https://drive.google.com/drive/u/0/my-drive', 
-      'newwindow', 
-      'width=500,
-      height=700'); 
-      return false;">Open Google Drive</a>
-    <%= form.text_field :photo %>
+    <%= form.text_field :photo, placeholder: "URL" %>
+    <div>
+    <a href="https://drive.google.com/drive/u/0/my-drive" class="secondary" role="button" onclick="window.open('https://drive.google.com/drive/u/0/my-drive', 'Google Drive', 'width=1000,height=700'); return false;">Open Google Drive</a>
+    </div>
+    <br/>
   </div>
 
   <div>
     <%= form.label :description, style: "display: block" %>
-    <%= form.text_field :description %>
+    <%= form.text_field :description, placeholder: "\"Big Event\", \"\Boys Girls Night\"" %>
   </div>
 
 
@@ -39,6 +37,6 @@
   </div>
 
   <div>
-    <%= form.submit %>
+    <%= form.submit "Send" %>
   </div>
 <% end %>

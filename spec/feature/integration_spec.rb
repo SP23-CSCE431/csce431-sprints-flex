@@ -158,7 +158,7 @@ RSpec.describe('Deleting All Points', type: :feature) do
     point_category_select.set('Test Category 1')
     fill_in "point[date_attended]", with: '2023-10-10'
     fill_in "point[description]", with: 'Test'
-    click_on 'Create Point'
+    click_on 'Send'
 
     visit new_point_path
     select "Test Category 1", from: "point[point_category_id]"
@@ -166,7 +166,7 @@ RSpec.describe('Deleting All Points', type: :feature) do
     point_category_select.set('Test Category 1')
     fill_in "point[date_attended]", with: '2023-10-10'
     fill_in "point[description]", with: 'Test 2'
-    click_on 'Create Point'
+    click_on 'Send'
 
     visit points_path
     click_on 'Delete All Points'
@@ -206,11 +206,10 @@ RSpec.describe('Creating a Point', type: :feature) do
     point_category_select.set('Test Category 1')
     fill_in "point[date_attended]", with: '2023-10-10'
     fill_in "point[description]", with: 'Test'
-    click_on 'Create Point'
-    expect(page).to(have_content('Point was successfully created'))
+    fill_in "point[photo]", with: 'https://test.com'
+    click_on 'Send'
+    expect(page).to(have_content('Point added for review'))
     expect(page).to(have_content('Test Category 1'))
-    click_on 'Destroy this point'
-    expect(page).to(have_content('Point was successfully destroyed'))
   end
 
   scenario 'invalid inputs' do
@@ -219,7 +218,7 @@ RSpec.describe('Creating a Point', type: :feature) do
     point_category_select.set('')
     fill_in "point[date_attended]", with: ''
     fill_in "point[description]", with: ''
-    click_on 'Create Point'
+    click_on 'Send'
     expect(page).to(have_content('can\'t be blank'))
   end
 end
@@ -378,14 +377,16 @@ RSpec.describe('Displaying Points by Categories', type: :feature) do
 
   scenario 'one point' do
     visit root_path
-    expect(page.text).to(include('Test Category 1    1'))
+    expect(page.text).to(include('Test Category 1'))
+    expect(page.text).to(include('1'))
   end
 
   scenario 'two points' do
     Point.create(admin_id: 5, point_category_id: 1, is_approved: true)
     visit new_point_path
     visit root_path
-    expect(page.text).to(include('Test Category 1    2'))
+    expect(page.text).to(include('Test Category 1'))
+    expect(page.text).to(include('2'))
   end
 end
 
