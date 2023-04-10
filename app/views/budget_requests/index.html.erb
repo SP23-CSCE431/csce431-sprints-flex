@@ -22,8 +22,3 @@
     <% end %>
   <% end %>
 </article>
-
-<!--Button to delete all requests-->
-<% if current_admin.role == "Executive" %>
-  <%= link_to 'Delete All Reimbursement Requests', delete_requests_budget_requests_path, data: { turbo_method: :get, turbo_confirm: 'Are you sure?'}, role: 'button' %>
-<% end %>
