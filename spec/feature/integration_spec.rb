@@ -53,31 +53,28 @@ RSpec.describe('Creating a Member', type: :feature) do
   end
 
   scenario 'valid inputs' do
-    visit new_member_path
+    visit new_admin_path
     expect(page).to(have_content('New member'))
-    fill_in "member[first_name]", with: 'John'
-    fill_in "member[last_name]", with: 'Smith'
-    fill_in "member[email]", with: 'test@tamu.edu'
-    fill_in "member[phone]", with: 1_234_567_890
-    fill_in "member[role]", with: 'executive'
-    click_on 'Create Member'
+    fill_in "admin[full_name]", with: 'John'
+    fill_in "admin[email]", with: 'test@tamu.edu'
+    fill_in "admin[phone]", with: 1_234_567_890
+    select "Member", from: "admin[role]"
+    click_on 'Submit'
     expect(page).to(have_content('Member was successfully created'))
     # expect(page).to have_content('John Smith')
     # expect(page).to have_content('test@tamu.edu')
     # expect(page).to have_content('1234567890')
     # expect(page).to have_content('executive')
-    click_on 'Destroy this member'
+    click_on 'Delete this Member'
     expect(page).to(have_content('Member was successfully destroyed'))
   end
 
   scenario 'invalid inputs' do
-    visit new_member_path
-    fill_in "member[first_name]", with: ''
-    fill_in "member[last_name]", with: ''
-    fill_in "member[email]", with: ''
-    fill_in "member[phone]", with: ''
-    fill_in "member[email]", with: ''
-    click_on 'Create Member'
+    visit new_admin_path
+    fill_in "admin[full_name]", with: ''
+    fill_in "admin[email]", with: ''
+    fill_in "admin[phone]", with: ''
+    click_on 'Submit'
     expect(page).to(have_content('can\'t be blank'))
   end
 end
@@ -438,9 +435,9 @@ RSpec.describe('Help Documentation is available', type: :feature) do
     expect(page).to(have_content('Adding a New Member'))
   end
 
-  scenario 'Has "Approving Points" section' do
+  scenario 'Has "Approving/Denying Points" section' do
     visit help_index_path
-    expect(page).to(have_content('How to Approve Points'))
+    expect(page).to(have_content('Approve and Deny Points'))
   end
 
   scenario 'Has "Understand Your Points" section' do
@@ -453,9 +450,9 @@ RSpec.describe('Help Documentation is available', type: :feature) do
     expect(page).to(have_content('Create a Reimbursement Request'))
   end
 
-  scenario 'Has "Approve a Reimbursement Request" section' do
+  scenario 'Has "Approve/Deny a Reimbursement Request" section' do
     visit help_index_path
-    expect(page).to(have_content('Approve a Reimbursement Request'))
+    expect(page).to(have_content('Reviewing Reimbursement Requests'))
   end
 end
 
