@@ -85,6 +85,14 @@ thead tr th {
   font-weight: 700 !important;
 }
 
+/* Notice Articles */
+
+article.notice {
+  font-weight: 600;
+  padding: calc(var(--block-spacing-vertical) - 1em)
+    var(--block-spacing-horizontal);
+}
+
 /* Login */
 
 .login {
