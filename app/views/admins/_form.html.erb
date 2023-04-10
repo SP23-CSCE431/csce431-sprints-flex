@@ -28,10 +28,14 @@
 
   <div>
     <%= form.label :role, style: "display: block" %>
-    <%= form.text_field :role %>
+    <% if @admin.role == 'Executive' %> 
+      <%= form.select :role, options_for_select([['Member', 'Member'], ['Leader', 'Leader'], ['Executive', 'Executive']]) %>
+    <% else %>
+      <%= form.select :role, options_for_select([['Member', 'Member'], ['Leader', 'Leader']]) %>
+    <% end %>
   </div>
 
   <div>
-    <%= form.submit %>
+    <%= form.submit "Submit" %>
   </div>
 <% end %>

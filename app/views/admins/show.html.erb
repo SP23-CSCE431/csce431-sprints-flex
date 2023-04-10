@@ -1,4 +1,6 @@
-<p style="color: green"><%= notice %></p>
+<!-- <p style="color: green"><%= notice %></p> -->
+
+<h4>Member View</h4>
 
 <%= render @admin %>
 
@@ -6,5 +8,5 @@
   <%= link_to "Edit this Member", edit_admin_path(@admin) %> |
   <%= link_to "Back to Members", admins_path %>
 
-  <%= button_to "Delete this member", @admin, method: :delete %>
+  <%= button_to "Delete this Member", @admin, method: :delete %>
 </div>
