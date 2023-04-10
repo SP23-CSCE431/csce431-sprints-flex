@@ -1,7 +1,3 @@
-<% if notice %>
-  <p style="color: green"><%= notice %></p>
-<% end %>
-
 <h1>Points</h1>
 
 <article class="total-points">
@@ -26,7 +22,7 @@
 <article id="verified-points">
   <header>Your Points</header>
   <% if @points.count == 0 %>
-    <span class="helper-text block" style="text-align: center">No verified points yet! <%= link_to "Ready to submit points?", new_point_path %></span>
+    <span class="helper-text block" style="text-align: center">Points that are verified or denied will appear here</span>
   <% else %>
   <% @points.each do |point| %>
     <%= render point %>
@@ -39,6 +35,7 @@
 </article>
 <% end %>
 
+<% if @points.count > 0 %>
 <article>
   <header>Points by Category</header>
   <table style="margin-top: 0">
@@ -56,6 +53,7 @@
     <% end %>
   </table>
 </article>
+<% end %>
 
 <!--Button to delete all points-->
 <% if current_admin.role == "Executive" %>
