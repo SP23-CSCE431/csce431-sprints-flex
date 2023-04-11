@@ -1,0 +1,9 @@
+<tr id="<%= dom_id admin %>">
+  <th scope="row"><%= admin.full_name %></th>
+  <td><%= admin.email %></td>
+  <td><%= admin.phone %></td>
+  <td><%= admin.role %></td>
+  <td><%=  Point.where(admin_id: admin.id).where.not(is_approved: nil).count %></td>
+  <td><%= link_to "Edit", edit_admin_path(admin.id) %></td>
+  <td><%= link_to "Show", admin %></td>
+</tr>

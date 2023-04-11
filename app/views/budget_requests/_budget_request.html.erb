@@ -12,8 +12,7 @@
     </span>
     <% end %>
 
-      <%= budget_request.budget_category.name %>  
-    <span class="inline-block helper-text">00/00/0000</span>
+    <span class="inline-block helper-text"><%= budget_request.description %>: <%= budget_request.value %></span>
   </summary>
   <p>Description</p>
   <span class="block helper-text">Sent at <%= budget_request.created_at %></span>

@@ -11,22 +11,83 @@
     </div>
   <% end %>
 
+  <article>
+  <header>Requester Information</header>
   <div>
-    <label for="budget_request_budget_category_id">Category</label>
-    <%= form.select :budget_category_id, BudgetCategory.order(:name).map { |budget_category| [budget_category.name, budget_category.id] }, include_blank: true, id: "id_of_the_budget_category_id_select_box" %>
+    <%= form.label "Name of Person Requesting Reimbursement", style: "display: block; text-transform: capitalize" %>
+    <%= form.text_field :requester_name, value: current_admin.full_name %>
   </div>
 
   <div>
-    <%= form.label :value, style: "display: block" %>
+    <%= form.label "Phone", style: "display: block; text-transform: capitalize" %>
+    <%= form.text_field :phone, value: current_admin.phone %>
+  </div>
+
+  <div>
+    <%= form.label "Mailing Address", style: "display: block; text-transform: capitalize" %>
+    <%= form.text_field :mailing_address %>
+  </div>
+  </article>
+
+  <article>
+  <header>Requester’s Affiliation with Texas A&M</header>
+  <div>
+    <fieldset>
+    <label for="student">
+      <%= form.radio_button :tamu_affiliation, "Student", id: "student", checked: true %>
+      Student
+    </label>
+    <label for="employee">
+      <%= form.radio_button :tamu_affiliation, "Employee", id: "employee" %>
+      Employee
+    </label>
+    <label for="unaffiliated">
+      <%= form.radio_button :tamu_affiliation, "Unaffiliated", id: "unaffiliated" %>
+      Not affiliated with TAMU
+    </label>
+  </fieldset>
+  </div>
+
+  <div>
+    <%= form.label "UIN", style: "display: block; text-transform: uppercase" %>
+    <%= form.text_field :uin, placeholder: "If affiliated, provide the requester’s UIN" %>
+  </div>
+  </article>
+
+  <article>
+  <header>Purchase Details</header>
+  <div>
+    <%= form.label "Cost of Purchase", style: "display: block; text-transform: capitalize" %>
     <%= form.number_field :value, step: 0.01 %>
   </div>
-
   <div>
-    <%= form.label :description, style: "display: block" %>
-    <%= form.text_field :description %>
+    <%= form.label "Description", style: "display: block" %>
+    <%= form.text_area :description, placeholder: "Describe what was purchased, the purpose of the purchase, and how it benefits the organization" %>
   </div>
+  </article>
 
+<article>
+  <header>Reimbursement Payment Method</header>
   <div>
-    <%= form.submit %>
+  <fieldset>
+    <label for="mailing_address">     
+      <%= form.radio_button :mail_option, "Sent to Mailing Address", id: "mailing_address", checked: true %>
+      Send to Mailing Address
+    </label>
+    <label for="pick_up">
+      <%= form.radio_button :mail_option, "Pick Up", id: "pick_up" %>
+      Pick Up
+    </label>
+    <label for="direct_deposit">
+      <%= form.radio_button :mail_option, "Direct Deposit", id: "direct_deposit" %>
+      Direct Deposit
+    </label>
+  </fieldset>
   </div>
+</article>
+
+<div>
+  <%= form.submit "Submit"%>
+</div>
+
 <% end %>

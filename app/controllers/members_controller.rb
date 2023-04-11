@@ -3,7 +3,7 @@ class MembersController < ApplicationController
 
   # GET /members or /members.json
   def index
-    @members = Member.all
+    @members = Admin.all
   end
 
   # GET /members/1 or /members/1.json
@@ -12,7 +12,7 @@ class MembersController < ApplicationController
 
   # GET /members/new
   def new
-    @member = Member.new
+    @member = Admin.new
   end
 
   # GET /members/1/edit
@@ -21,7 +21,7 @@ class MembersController < ApplicationController
 
   # POST /members or /members.json
   def create
-    @member = Member.new(member_params)
+    @member = Admin.new(member_params)
 
     respond_to do |format|
       if @member.save
@@ -60,11 +60,11 @@ class MembersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_member
-      @member = Member.find(params[:id])
+      @member = Admin.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
     def member_params
-      params.require(:member).permit(:first_name, :last_name, :email, :phone, :role)
+      params.require(:member).permit(:full_name, :email, :phone, :role)
     end
 end

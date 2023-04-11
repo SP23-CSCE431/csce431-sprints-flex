@@ -265,7 +265,7 @@ end
 
 RSpec.describe(Point, type: :model) do
   subject do
-    described_class.new(admin_id: 1, point_category_id: 1)
+    described_class.new({admin_id: 1, point_category_id: 1, is_approved: true, description: "Big Event", photo: "https://via.placeholder.com/350x150", date_attended: "2023-03-09 20:14:17 UTC"})
   end
 
   # Sunny Cases
@@ -283,12 +283,12 @@ RSpec.describe(Point, type: :model) do
   end
 
   it 'is valid with a valid description' do
-    subject.description = 'Test'
+    subject.description = 'Big Event'
     expect(subject).to(be_valid)
   end
 
   it 'is valid with a valid date' do
-    subject.date_attended = '2023-10-10'
+    subject.date_attended = '03/09/2023'
     expect(subject).to(be_valid)
   end
 

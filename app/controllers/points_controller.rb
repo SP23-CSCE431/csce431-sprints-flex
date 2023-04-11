@@ -42,7 +42,7 @@ class PointsController < ApplicationController
 
     respond_to do |format|
       if @point.save
-        format.html { redirect_to(point_url(@point), notice: "Point was successfully created.") }
+        format.html { redirect_to(points_path, notice: "Point added for review") }
         format.json { render(:show, status: :created, location: @point) }
       else
         format.html { render(:new, status: :unprocessable_entity) }
@@ -99,7 +99,7 @@ class PointsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def point_params
-      params.require(:point).permit(:admin_id, :point_category_id, :is_approved, :description, :date_attended)
+      params.require(:point).permit(:admin_id, :point_category_id, :is_approved, :photo, :description, :date_attended)
     end
 
 end

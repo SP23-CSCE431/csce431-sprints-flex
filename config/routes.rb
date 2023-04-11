@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :budget_requests
+  
   resources :budget_categories
   #devise_for :admins
 
@@ -10,12 +10,16 @@ Rails.application.routes.draw do
       get 'delete_points'
     end
   end
-  #   collection do
-  #     get 'help/:first' => 'points#help'
-  #   end
-  # end
+  # This is the route that calls the delete_requests function
+  # delete 'budget_requests/delete_requests', to: 'budget_requests#delete_requests', as: 'delete_requests'
+  resources :budget_requests do
+    collection do
+      get 'delete_requests'
+    end
+  end
+
   resources :point_categories, path: 'admin/points/categories'
-  resources :members, path: 'admin/members'
+  #resources :members, path: 'members'
   resources :point_reviews, path: 'admin/points' do
     collection do
       get '/admin/points/:point_id/approve', to: 'point_reviews#approve', as: 'approve_point_review'
@@ -29,13 +33,13 @@ Rails.application.routes.draw do
     end
   end
 
-
-  get 'help/:first' => 'help#help'
+  resources :help, only: [:index]
 
   root 'points#index'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   #root to: 'dashboards#show'
+  resources :admins, path: 'admin/members'
   devise_for :admins, controllers: { omniauth_callbacks: 'admins/omniauth_callbacks' }
   devise_scope :admin do
     get 'admins/sign_in', to: 'admins/sessions#new', as: :new_admin_session
