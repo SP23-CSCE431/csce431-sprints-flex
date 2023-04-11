@@ -1,8 +1,7 @@
 <!-- <p style="color: green"><%= notice %></p> -->
 
-<h4>Member View</h4>
+<h1><%= @admin.full_name %></h1>
 
-<%= link_to "Back to Members", admins_path, role: "button" %>
 <article id="admin">
   <table>
     <thead>
@@ -20,12 +19,13 @@
         <%= render @admin %>
     </tbody>
   </table>
+  <footer><%= link_to "Back to All Members", admins_path %></footer>
 </article>
 
 <!-- View all member's points and category breakdowns -->
 <article>
 <% if Point.paginate(page: params[:page], per_page: 5).where(admin_id: @admin.id).where.not(is_approved: nil).count == 0 %>
-    <span class="helper-text block" style="text-align: center">Points that are verified or denied will appear here</span>
+    <span class="helper-text block" style="text-align: center"><%= @admin.full_name %> has no verified or denied points.</span>
   <% else %>
     <header><%= @admin.full_name %>'s Points</header>
   <% Point.paginate(page: params[:page], per_page: 5).where(admin_id: @admin.id).where.not(is_approved: nil).each do |point| %>
@@ -58,5 +58,4 @@
   </table>
 </article>
 <% end %>
-  <%= button_to "Delete this Member", @admin, method: :delete %>
 </article>
