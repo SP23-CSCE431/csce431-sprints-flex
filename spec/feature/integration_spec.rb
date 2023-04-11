@@ -289,19 +289,19 @@ RSpec.describe('Creating a Budget Request', type: :feature) do
     select "Test Category", from: "budget_request[budget_category_id]"
     fill_in "budget_request[value]", with: 2
     fill_in "budget_request[description]", with: 'Test'
-    click_on 'Create Budget request'
-    expect(page).to(have_content('Budget request was successfully created.'))
+    click_on 'Submit'
+    expect(page).to(have_content('Reimbursement request was successfully created.'))
     expect(page).to(have_content('2'))
     expect(page).to(have_content('Test'))
-    click_on 'Destroy this budget request'
-    expect(page).to(have_content('Budget request was successfully destroyed.'))
+    click_on 'Delete this Reimbursement Request'
+    expect(page).to(have_content('Reimbursement request was successfully deleted.'))
   end
 
   scenario 'invalid inputs' do
     visit new_budget_request_path
     fill_in "budget_request[value]", with: nil
     fill_in "budget_request[description]", with: nil
-    click_on 'Create Budget request'
+    click_on 'Submit'
     expect(page).to(have_content('can\'t be blank'))
   end
 end
@@ -335,13 +335,13 @@ RSpec.describe('Deleting All Budget Requests', type: :feature) do
     select "Test Category", from: "budget_request[budget_category_id]"
     fill_in "budget_request[value]", with: 2
     fill_in "budget_request[description]", with: 'Test'
-    click_on 'Create Budget request'
+    click_on 'Submit'
 
     visit new_budget_request_path
     select "Test Category", from: "budget_request[budget_category_id]"
     fill_in "budget_request[value]", with: 3
     fill_in "budget_request[description]", with: 'Test 2'
-    click_on 'Create Budget request'
+    click_on 'Submit'
 
     visit budget_requests_path
     click_on 'Delete All Reimbursement Requests'
@@ -489,7 +489,7 @@ RSpec.describe('Budget Reimbursment Review', type: :feature) do
     select "Test Category", from: "budget_request[budget_category_id]"
     fill_in "budget_request[value]", with: 2
     fill_in "budget_request[description]", with: 'Test'
-    click_on 'Create Budget request'
+    click_on 'Submit'
     visit budget_reviews_path
     expect(page).to(have_content('2'))
     expect(page).to(have_content('Test'))
@@ -500,7 +500,7 @@ RSpec.describe('Budget Reimbursment Review', type: :feature) do
     select "Test Category", from: "budget_request[budget_category_id]"
     fill_in "budget_request[value]", with: 2
     fill_in "budget_request[description]", with: 'Test'
-    click_on 'Create Budget request'
+    click_on 'Submit'
     visit budget_reviews_path
     click_link 'Approve'
 
@@ -513,7 +513,7 @@ RSpec.describe('Budget Reimbursment Review', type: :feature) do
     select "Test Category", from: "budget_request[budget_category_id]"
     fill_in "budget_request[value]", with: 2
     fill_in "budget_request[description]", with: 'Test'
-    click_on 'Create Budget request'
+    click_on 'Submit'
     visit budget_reviews_path
     click_link 'Deny'
     
