@@ -7,7 +7,7 @@ PointCategory.create!([
 Admin.create!([
   {full_name: "Liberato Aguilar", email: "liberatoaguilar@tamu.edu", phone: "215-488-9990", role: "Executive"},
   {full_name: "Jack Warham", email: "jtw906@tamu.edu", phone: "631-692-2879", role: "Executive"},
-  {full_name: "Brennan Rouhana", email: "brennan@tamu.edu", phone: "630-617-4481", role: "Executive"},
+  {full_name: "Brennan Rouhana", email: "brouhana@tamu.edu", phone: "630-617-4481", role: "Executive"},
   {full_name: "Ardian Kuswanto", email: "ardian.kuswanto@tamu.edu", phone: "310-634-3428", role: "Executive"}
 ])
 test = Admin.new(full_name: "Test User", email: "test@example.com", phone: "410-653-3229", role: "Executive")
