@@ -12,7 +12,7 @@
       <th scope="col">Category</th>
       <th scope="col">Photo</th>
       <th scope="col">Description</th>
-      <th scope="col"></th>
+      <th scope="col">Date</th>
       <th scope="col"></th>
       <th scope="col"></th>
     </tr>
@@ -24,8 +24,7 @@
         <td><%= pending_point.point_category.name %></td>
         <td><%= pending_point.photo %></td>
         <td><%= pending_point.description %></td>
-        <%= pending_point.id %>
-        <td><a href="#">More</a></td>
+        <td><%= pending_point.date_attended.in_time_zone('Central Time (US & Canada)').strftime('%m/%d/%Y') %></td>
         <td><%= link_to 'Approve', approve_point_review_point_reviews_path(pending_point.id), method: :get, role: 'button' %></td>
         <td><%= link_to 'Deny', deny_point_review_point_reviews_path(pending_point.id), method: :get, role: 'button', class: 'secondary outline' %></td>
     </tr>
