@@ -12,7 +12,6 @@
         <li><%= link_to "Point Requests", point_reviews_path %></li>
         <li><%= link_to "Point Categories", point_categories_path %></li>
         <li><%= link_to "Reimbursement Requests", budget_reviews_path %></li>
-        <li><%= link_to "Reimbursement Categories", budget_categories_path %></li>
         <!-- Delete all Points and Reimbursement Reqeusts -->
         <% if current_admin.role == "Executive" %>
           <li><%= link_to 'Delete All Points', delete_points_points_path, data: { turbo_method: :get, turbo_confirm: 'Are you sure?'}, style: "color: #D32F2F;" %></li>
@@ -29,7 +28,6 @@
           <%= current_admin.full_name %>
         </a>
         <ul role="listbox">
-          <li><a href="#">Settings</a></li>
           <li><%= link_to "Help", help_index_path %></li>
           <li><%= link_to "Sign Out", destroy_admin_session_path, style: "color: #D32F2F"%></li>
         </ul>

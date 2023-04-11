@@ -1,12 +1,61 @@
 <!-- <p style="color: green"><%= notice %></p> -->
 
-<h4>Member View</h4>
+<h1><%= @admin.full_name %></h1>
 
-<%= render @admin %>
+<article id="admin">
+  <table>
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Phone</th>
+        <th scope="col">Role</th>
+        <th scope="col">Points</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+        <%= render @admin %>
+    </tbody>
+  </table>
+  <footer><%= link_to "Back to All Members", admins_path %></footer>
+</article>
 
-<div>
-  <%= link_to "Edit this Member", edit_admin_path(@admin) %> |
-  <%= link_to "Back to Members", admins_path %>
+<!-- View all member's points and category breakdowns -->
+<article>
+<% if Point.paginate(page: params[:page], per_page: 5).where(admin_id: @admin.id).where.not(is_approved: nil).count == 0 %>
+    <span class="helper-text block" style="text-align: center"><%= @admin.full_name %> has no verified or denied points.</span>
+  <% else %>
+    <header><%= @admin.full_name %>'s Points</header>
+  <% Point.paginate(page: params[:page], per_page: 5).where(admin_id: @admin.id).where.not(is_approved: nil).each do |point| %>
+    <%= render point %>
+  <% end %>
+  <% if Point.where(admin_id: @admin.id).where.not(is_approved: nil).count > 5 %>
+  <footer>
+  <%= will_paginate Point.paginate(page: params[:page], per_page: 5).where(admin_id: @admin.id).where.not(is_approved: nil) %>
+  </footer>
+  <% end %>
+<% end %>
+</article>
 
-  <%= button_to "Delete this Member", @admin, method: :delete %>
-</div>
+<% if Point.paginate(page: params[:page], per_page: 5).where(admin_id: @admin.id).where.not(is_approved: nil).count > 0 %>
+<article>
+  <header>Points by Category</header>
+  <table style="margin-top: 0">
+    <thead>
+    <tr>
+      <th scope="col">Category</th>
+      <th scope="col">Total</th>
+    </tr>
+    </thead>
+    <% Point.joins(:point_category).group(:name).where(admin_id: @admin.id, is_approved: true).count.each do |point| %>
+    <tr>
+      <td><%= point.first %></td>
+      <td><%= point.last %> pts</td>
+    </tr>
+    <% end %>
+  </table>
+</article>
+<% end %>
+</article>
