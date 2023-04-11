@@ -1,0 +1,7 @@
+<h1>Editing Member</h1>
+
+<article>
+  <%= render "form", member: @member %>
+  <footer><%= link_to "Back to Members", admins_path %></footer>
+</article>
+<%= button_to "Delete", @member, method: :delete, class: "secondary" %>

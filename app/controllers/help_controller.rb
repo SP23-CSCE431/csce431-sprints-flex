@@ -1,5 +1,4 @@
 class HelpController < ApplicationController
-  def help
-    render "help/#{params[:first]}"
+  def index
   end
 end

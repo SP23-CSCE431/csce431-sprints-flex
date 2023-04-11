@@ -1,0 +1,27 @@
+<!-- <p style="color: blue"><%= notice %></p> -->
+
+<h1>Members</h1>
+
+<%= link_to "New Member", new_admin_path, role: "button" %>
+
+<article id="admin">
+  <table>
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Phone</th>
+        <th scope="col">Role</th>
+        <th scope="col">Points</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @admins.each do |admin| %>
+        <%= render admin %>
+      <% end %>  
+    </tbody>
+  </table>
+</article>
+

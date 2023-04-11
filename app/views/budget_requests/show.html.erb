@@ -1,10 +1,8 @@
-<p style="color: green"><%= notice %></p>
-
 <%= render @budget_request %>
 
 <div>
-  <%= link_to "Edit this budget request", edit_budget_request_path(@budget_request) %> |
-  <%= link_to "Back to budget requests", budget_requests_path %>
+  <%= link_to "Edit this Reimbursement Request", edit_budget_request_path(@budget_request) %> |
+  <%= link_to "Back to Reimbursement Requests", budget_requests_path %>
 
-  <%= button_to "Destroy this budget request", @budget_request, method: :delete %>
+  <%= button_to "Delete this Reimbursement Request", @budget_request, method: :delete %>
 </div>

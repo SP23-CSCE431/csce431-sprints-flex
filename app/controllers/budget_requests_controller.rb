@@ -33,7 +33,7 @@ class BudgetRequestsController < ApplicationController
 
     respond_to do |format|
       if @budget_request.save
-        format.html { redirect_to(budget_request_url(@budget_request), notice: "Budget request was successfully created.") }
+        format.html { redirect_to(budget_request_url(@budget_request), notice: "Reimbursement request was successfully created.") }
         format.json { render(:show, status: :created, location: @budget_request) }
       else
         format.html { render(:new, status: :unprocessable_entity) }
@@ -47,7 +47,7 @@ class BudgetRequestsController < ApplicationController
   def update
     respond_to do |format|
       if @budget_request.update(budget_request_params)
-        format.html { redirect_to(budget_request_url(@budget_request), notice: "Budget request was successfully updated.") }
+        format.html { redirect_to(budget_request_url(@budget_request), notice: "Reimbursement request was successfully updated.") }
         format.json { render(:show, status: :ok, location: @budget_request) }
       else
         format.html { render(:edit, status: :unprocessable_entity) }
@@ -62,9 +62,20 @@ class BudgetRequestsController < ApplicationController
     @budget_request.destroy
 
     respond_to do |format|
-      format.html { redirect_to(budget_requests_url, notice: "Budget request was successfully destroyed.") }
+      format.html { redirect_to(budget_requests_url, notice: "Reimbursement request was successfully deleted.") }
       format.json { head(:no_content) }
     end
+  end
+
+  def delete_requests
+    # Delete all requests, will be called from requests
+    if current_admin.role == "Executive"
+      BudgetRequest.delete_all
+      flash[:notice] = 'All reimbursement requests have been successfully deleted.'
+    else
+      flash[:notice] = 'Permission Denied.'
+    end
+    redirect_to budget_requests_path
   end
 
   private
@@ -76,6 +87,6 @@ class BudgetRequestsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def budget_request_params
-    params.require(:budget_request).permit(:admin_id, :budget_category_id, :is_approved, :value, :description)
+    params.require(:budget_request).permit(:admin_id, :is_approved, :value, :description, :requester_name, :phone, :mailing_address, :mail_option, :tamu_affiliation, :uin)
   end
 end

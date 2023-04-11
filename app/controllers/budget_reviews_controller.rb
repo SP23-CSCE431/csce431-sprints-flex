@@ -2,7 +2,7 @@ class BudgetReviewsController < ApplicationController
     
   def index
     @user_id = current_admin.id
-    @pending_budgets = BudgetRequest.paginate(page: params[:page], per_page: 10).where(is_approved: nil)
+    @pending_budgets = BudgetRequest.paginate(page: params[:page], per_page: 5).where(is_approved: nil)
     @pending_budgets_count = BudgetRequest.where(is_approved: nil).count
   end   
 
