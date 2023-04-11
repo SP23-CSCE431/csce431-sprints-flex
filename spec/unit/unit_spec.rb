@@ -346,7 +346,7 @@ end
 
 RSpec.describe(BudgetRequest, type: :model) do
   subject do
-    described_class.new(admin_id: 1, budget_category_id: 1, value: 2.5)
+    described_class.new(admin_id: 1, value: 2.5, phone: '123-435-7890', mailing_address: 'test address', mail_option: 'pick up', tamu_affiliation: 'student', requester_name: 'test name', description: 'test description', uin: 1234)
   end
 
   # Sunny Cases
@@ -355,16 +355,42 @@ RSpec.describe(BudgetRequest, type: :model) do
     expect(subject).to(be_valid)
   end
 
-  it 'is valid with a valid id' do
+  it 'is valid with a valid admin id' do
     subject.admin_id = 1
     expect(subject).to(be_valid)
 
-    subject.budget_category_id = 1
     expect(subject).to(be_valid)
   end
 
-  it 'is valid with large integers' do
+  it 'is valid with large values' do
     subject.value = 1_000_000
+    expect(subject).to(be_valid)
+  end
+
+  it 'is valid with small values' do
+    subject.value = 0.5
+    expect(subject).to(be_valid)
+  end
+
+  it 'is valid with all mailing options' do
+    subject.mail_option = 'sent to mailing address'
+    expect(subject).to(be_valid)
+
+    subject.mail_option = 'pick up'
+    expect(subject).to(be_valid)
+
+    subject.mail_option = 'direct deposit'
+    expect(subject).to(be_valid)
+  end
+
+  it 'is valid with all tamu affiliations' do
+    subject.tamu_affiliation = 'student'
+    expect(subject).to(be_valid)
+
+    subject.tamu_affiliation = 'employee'
+    expect(subject).to(be_valid)
+
+    subject.tamu_affiliation = 'unaffiliated'
     expect(subject).to(be_valid)
   end
 
@@ -372,11 +398,6 @@ RSpec.describe(BudgetRequest, type: :model) do
 
   it 'is not valid without a admin id' do
     subject.admin_id = nil
-    expect(subject).not_to(be_valid)
-  end
-
-  it 'is not valid without a point category id' do
-    subject.budget_category_id = nil
     expect(subject).not_to(be_valid)
   end
 
@@ -397,25 +418,6 @@ RSpec.describe(BudgetRequest, type: :model) do
     expect(subject).not_to(be_valid)
   end
 
-  it 'is not valid with a non integer budget category id' do
-    subject.budget_category_id = 'hello'
-    expect(subject).not_to(be_valid)
-
-    subject.budget_category_id = true
-    expect(subject).not_to(be_valid)
-
-    subject.budget_category_id = 1.1
-    expect(subject).not_to(be_valid)
-
-    subject.budget_category_id = -1.1
-    expect(subject).not_to(be_valid)
-  end
-
-  it 'is not valid with an invalid budget category id' do
-    subject.budget_category_id = -1
-    expect(subject).not_to(be_valid)
-  end
-
   it 'is not valid with a non integer admin id' do
     subject.admin_id = 'hello'
     expect(subject).not_to(be_valid)
@@ -432,6 +434,95 @@ RSpec.describe(BudgetRequest, type: :model) do
 
   it 'is not valid with an invalid admin id' do
     subject.admin_id = -1
+    expect(subject).not_to(be_valid)
+  end
+
+  it 'is not valid with invalid phone' do
+    subject.phone = nil
+    expect(subject).not_to(be_valid)
+
+    subject.phone = 'test'
+    expect(subject).not_to(be_valid)
+
+    subject.phone = -1
+    expect(subject).not_to(be_valid)
+
+    subject.phone = -1.1
+    expect(subject).not_to(be_valid)
+
+    subject.phone = 1.1
+    expect(subject).not_to(be_valid)
+
+    subject.phone = 1122323323232323
+    expect(subject).not_to(be_valid)
+
+    subject.phone = 00000000
+    expect(subject).not_to(be_valid)
+
+    subject.phone = '9999999'
+    expect(subject).not_to(be_valid)
+  end
+
+  it 'is not valid with no mailing address' do
+    subject.mailing_address = nil
+    expect(subject).not_to(be_valid)
+  end
+
+  it 'is not valid with an invalid mailing option' do
+    subject.mail_option = nil
+    expect(subject).not_to(be_valid)
+
+    subject.mail_option = 'test option'
+    expect(subject).not_to(be_valid)
+
+    subject.mail_option = 1
+    expect(subject).not_to(be_valid)
+
+    subject.mail_option = -1.1
+    expect(subject).not_to(be_valid)
+  end
+
+  it 'is not valid with an invalid tamu affiliation' do
+    subject.tamu_affiliation = nil
+    expect(subject).not_to(be_valid)
+
+    subject.tamu_affiliation = 'test option'
+    expect(subject).not_to(be_valid)
+
+    subject.tamu_affiliation = 1
+    expect(subject).not_to(be_valid)
+
+    subject.tamu_affiliation = -1.1
+    expect(subject).not_to(be_valid)
+  end
+
+  it 'is not valid with an invalid name' do
+    subject.requester_name = nil
+    expect(subject).not_to(be_valid)
+  end
+
+  it 'is not valid with an invalid description' do
+    subject.description = 'test'
+    expect(subject).not_to(be_valid)
+
+    subject.description = nil
+    expect(subject).not_to(be_valid)
+  end
+
+  it 'is not valid with an invalid uin' do
+    subject.uin = 'test'
+    expect(subject).not_to(be_valid)
+
+    subject.uin = nil
+    expect(subject).not_to(be_valid)
+
+    subject.uin = -1
+    expect(subject).not_to(be_valid)
+
+    subject.uin = -1.1
+    expect(subject).not_to(be_valid)
+
+    subject.uin = 1.1
     expect(subject).not_to(be_valid)
   end
 
