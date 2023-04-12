@@ -1,4 +1,3 @@
-
 PointCategory.create!([
   {name: "Test Category 1", value: 1},
   {name: "Test Category 2", value: 2}

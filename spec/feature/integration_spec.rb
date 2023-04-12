@@ -291,7 +291,7 @@ RSpec.describe('Creating a Budget Request', type: :feature) do
     fill_in "budget_request[phone]", with: '123-456-7890'
     fill_in "budget_request[description]", with: 'description'
     fill_in "budget_request[mailing_address]", with: 'address'
-    fill_in "budget_request[uin]", with: 123456789
+    fill_in "budget_request[uin]", with: 123_456_789
     fill_in "budget_request[requester_name]", with: 'name'
     click_on 'Submit'
     expect(page).to(have_content('Reimbursement request was successfully created.'))
@@ -344,7 +344,7 @@ RSpec.describe('Deleting All Budget Requests', type: :feature) do
     fill_in "budget_request[phone]", with: '123-456-7890'
     fill_in "budget_request[description]", with: 'description'
     fill_in "budget_request[mailing_address]", with: 'address'
-    fill_in "budget_request[uin]", with: 123456789
+    fill_in "budget_request[uin]", with: 123_456_789
     fill_in "budget_request[requester_name]", with: 'name'
     click_on 'Submit'
 
@@ -353,7 +353,7 @@ RSpec.describe('Deleting All Budget Requests', type: :feature) do
     fill_in "budget_request[phone]", with: '999-999-9999'
     fill_in "budget_request[description]", with: 'description 2'
     fill_in "budget_request[mailing_address]", with: 'address 2'
-    fill_in "budget_request[uin]", with: 111111111
+    fill_in "budget_request[uin]", with: 111_111_111
     fill_in "budget_request[requester_name]", with: 'name 2'
     click_on 'Submit'
 
@@ -504,7 +504,7 @@ RSpec.describe('Budget Reimbursment Review', type: :feature) do
     fill_in "budget_request[phone]", with: '123-456-7890'
     fill_in "budget_request[description]", with: 'description'
     fill_in "budget_request[mailing_address]", with: 'address'
-    fill_in "budget_request[uin]", with: 123456789
+    fill_in "budget_request[uin]", with: 123_456_789
     fill_in "budget_request[requester_name]", with: 'name'
     click_on 'Submit'
     visit budget_reviews_path
@@ -523,7 +523,7 @@ RSpec.describe('Budget Reimbursment Review', type: :feature) do
     fill_in "budget_request[phone]", with: '123-456-7890'
     fill_in "budget_request[description]", with: 'description'
     fill_in "budget_request[mailing_address]", with: 'address'
-    fill_in "budget_request[uin]", with: 123456789
+    fill_in "budget_request[uin]", with: 123_456_789
     fill_in "budget_request[requester_name]", with: 'name'
     click_on 'Submit'
     visit budget_reviews_path
@@ -539,12 +539,12 @@ RSpec.describe('Budget Reimbursment Review', type: :feature) do
     fill_in "budget_request[phone]", with: '123-456-7890'
     fill_in "budget_request[description]", with: 'description'
     fill_in "budget_request[mailing_address]", with: 'address'
-    fill_in "budget_request[uin]", with: 123456789
+    fill_in "budget_request[uin]", with: 123_456_789
     fill_in "budget_request[requester_name]", with: 'name'
     click_on 'Submit'
     visit budget_reviews_path
     click_link 'Deny'
-    
+
     request = BudgetRequest.find_by(admin_id: 5)
     expect(request).to(have_attributes(is_approved: false))
   end
