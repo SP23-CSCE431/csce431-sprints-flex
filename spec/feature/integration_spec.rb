@@ -61,11 +61,12 @@ RSpec.describe('Creating a Member', type: :feature) do
     select "Member", from: "admin[role]"
     click_on 'Submit'
     expect(page).to(have_content('Member was successfully created'))
-    # expect(page).to have_content('John Smith')
-    # expect(page).to have_content('test@tamu.edu')
-    # expect(page).to have_content('1234567890')
-    # expect(page).to have_content('executive')
-    click_on 'Delete this Member'
+    expect(page).to(have_content('John'))
+    expect(page).to(have_content('test@tamu.edu'))
+    expect(page).to(have_content('1234567890'))
+    expect(page).to(have_content('Member'))
+    click_on 'Show'
+    click_on 'Destroy'
     expect(page).to(have_content('Member was successfully destroyed'))
   end
 
