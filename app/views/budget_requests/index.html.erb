@@ -6,13 +6,13 @@
 
 <%= link_to "New Reimbursement Request", new_budget_request_path, role: "button" %>
 
-<article id="verified-requests">
+<article>
   <header>Awaiting Review</header>
-  <% @budget_requests.each do |budget_request| %>
-    <% if budget_request.is_approved == nil %>
-      <%= render budget_request %>
+    <% @budget_requests.each do |budget_request| %>
+      <% if budget_request.is_approved == nil %>
+        <%= render budget_request %>
+      <% end %>
     <% end %>
-  <% end %>
 </article>
 
 <article id="verified-requests">

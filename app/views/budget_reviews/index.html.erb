@@ -9,8 +9,12 @@
 <table>
   <tbody>
     <tr>
-      <th scope="row">Request sent by</th>
+      <th scope="row" style="font-weight: bold">Request sent by</th>
       <td><%= pending_budget.admin.full_name %></td>
+    </tr>
+    <tr>
+      <th scope="row" style="font-weight: bold">Request sent on</th>
+      <td><%= pending_budget.created_at.in_time_zone('Central Time (US & Canada)').strftime('%m/%d/%Y %I:%M %p') %></td>
     </tr>
     <tr>
       <th scope="row">Requester</th>

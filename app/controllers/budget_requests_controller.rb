@@ -75,7 +75,7 @@ class BudgetRequestsController < ApplicationController
     else
       flash[:notice] = 'Permission Denied.'
     end
-    redirect_to budget_requests_path
+    redirect_to(budget_requests_path)
   end
 
   private
