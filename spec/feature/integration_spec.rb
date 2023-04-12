@@ -61,11 +61,12 @@ RSpec.describe('Creating a Member', type: :feature) do
     select "Member", from: "admin[role]"
     click_on 'Submit'
     expect(page).to(have_content('Member was successfully created'))
-    # expect(page).to have_content('John Smith')
-    # expect(page).to have_content('test@tamu.edu')
-    # expect(page).to have_content('1234567890')
-    # expect(page).to have_content('executive')
-    click_on 'Delete this Member'
+    expect(page).to(have_content('John'))
+    expect(page).to(have_content('test@tamu.edu'))
+    expect(page).to(have_content('1234567890'))
+    expect(page).to(have_content('Member'))
+    click_on 'Show'
+    click_on 'Destroy'
     expect(page).to(have_content('Member was successfully destroyed'))
   end
 
@@ -286,13 +287,16 @@ RSpec.describe('Creating a Budget Request', type: :feature) do
 
   scenario 'valid inputs' do
     visit new_budget_request_path
-    select "Test Category", from: "budget_request[budget_category_id]"
     fill_in "budget_request[value]", with: 2
-    fill_in "budget_request[description]", with: 'Test'
+    fill_in "budget_request[phone]", with: '123-456-7890'
+    fill_in "budget_request[description]", with: 'description'
+    fill_in "budget_request[mailing_address]", with: 'address'
+    fill_in "budget_request[uin]", with: 123_456_789
+    fill_in "budget_request[requester_name]", with: 'name'
     click_on 'Submit'
     expect(page).to(have_content('Reimbursement request was successfully created.'))
     expect(page).to(have_content('2'))
-    expect(page).to(have_content('Test'))
+    expect(page).to(have_content('description'))
     click_on 'Delete this Reimbursement Request'
     expect(page).to(have_content('Reimbursement request was successfully deleted.'))
   end
@@ -300,7 +304,11 @@ RSpec.describe('Creating a Budget Request', type: :feature) do
   scenario 'invalid inputs' do
     visit new_budget_request_path
     fill_in "budget_request[value]", with: nil
+    fill_in "budget_request[phone]", with: nil
     fill_in "budget_request[description]", with: nil
+    fill_in "budget_request[mailing_address]", with: nil
+    fill_in "budget_request[uin]", with: nil
+    fill_in "budget_request[requester_name]", with: nil
     click_on 'Submit'
     expect(page).to(have_content('can\'t be blank'))
   end
@@ -332,15 +340,21 @@ RSpec.describe('Deleting All Budget Requests', type: :feature) do
   scenario 'valid inputs' do
 
     visit new_budget_request_path
-    select "Test Category", from: "budget_request[budget_category_id]"
     fill_in "budget_request[value]", with: 2
-    fill_in "budget_request[description]", with: 'Test'
+    fill_in "budget_request[phone]", with: '123-456-7890'
+    fill_in "budget_request[description]", with: 'description'
+    fill_in "budget_request[mailing_address]", with: 'address'
+    fill_in "budget_request[uin]", with: 123_456_789
+    fill_in "budget_request[requester_name]", with: 'name'
     click_on 'Submit'
 
     visit new_budget_request_path
-    select "Test Category", from: "budget_request[budget_category_id]"
     fill_in "budget_request[value]", with: 3
-    fill_in "budget_request[description]", with: 'Test 2'
+    fill_in "budget_request[phone]", with: '999-999-9999'
+    fill_in "budget_request[description]", with: 'description 2'
+    fill_in "budget_request[mailing_address]", with: 'address 2'
+    fill_in "budget_request[uin]", with: 111_111_111
+    fill_in "budget_request[requester_name]", with: 'name 2'
     click_on 'Submit'
 
     visit budget_requests_path
@@ -481,25 +495,36 @@ RSpec.describe('Budget Reimbursment Review', type: :feature) do
 
   scenario 'Page Exists' do
     visit budget_reviews_path
-    expect(page).to(have_content('Budget Reimbursement Requests'))
+    expect(page).to(have_content('Reimbursement Requests'))
   end
 
   scenario 'New Budget Request Arrives' do
     visit new_budget_request_path
-    select "Test Category", from: "budget_request[budget_category_id]"
     fill_in "budget_request[value]", with: 2
-    fill_in "budget_request[description]", with: 'Test'
+    fill_in "budget_request[phone]", with: '123-456-7890'
+    fill_in "budget_request[description]", with: 'description'
+    fill_in "budget_request[mailing_address]", with: 'address'
+    fill_in "budget_request[uin]", with: 123_456_789
+    fill_in "budget_request[requester_name]", with: 'name'
     click_on 'Submit'
     visit budget_reviews_path
+    expect(page).to(have_content('Reimbursement Requests'))
     expect(page).to(have_content('2'))
-    expect(page).to(have_content('Test'))
+    expect(page).to(have_content('description'))
+    expect(page).to(have_content('address'))
+    expect(page).to(have_content('name'))
+    expect(page).to(have_content('123-456-7890'))
+    expect(page).to(have_content('123456789'))
   end
 
   scenario 'Approve Request' do
     visit new_budget_request_path
-    select "Test Category", from: "budget_request[budget_category_id]"
     fill_in "budget_request[value]", with: 2
-    fill_in "budget_request[description]", with: 'Test'
+    fill_in "budget_request[phone]", with: '123-456-7890'
+    fill_in "budget_request[description]", with: 'description'
+    fill_in "budget_request[mailing_address]", with: 'address'
+    fill_in "budget_request[uin]", with: 123_456_789
+    fill_in "budget_request[requester_name]", with: 'name'
     click_on 'Submit'
     visit budget_reviews_path
     click_link 'Approve'
@@ -510,13 +535,16 @@ RSpec.describe('Budget Reimbursment Review', type: :feature) do
 
   scenario 'Deny Request' do
     visit new_budget_request_path
-    select "Test Category", from: "budget_request[budget_category_id]"
     fill_in "budget_request[value]", with: 2
-    fill_in "budget_request[description]", with: 'Test'
+    fill_in "budget_request[phone]", with: '123-456-7890'
+    fill_in "budget_request[description]", with: 'description'
+    fill_in "budget_request[mailing_address]", with: 'address'
+    fill_in "budget_request[uin]", with: 123_456_789
+    fill_in "budget_request[requester_name]", with: 'name'
     click_on 'Submit'
     visit budget_reviews_path
     click_link 'Deny'
-    
+
     request = BudgetRequest.find_by(admin_id: 5)
     expect(request).to(have_attributes(is_approved: false))
   end

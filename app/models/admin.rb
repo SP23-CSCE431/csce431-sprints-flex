@@ -11,8 +11,7 @@ class Admin < ApplicationRecord
     begin
       create_with(uid: uid, full_name: full_name, avatar_url: avatar_url).find_by!(email: email)
     rescue ActiveRecord::RecordInvalid
-      return nil
+      nil
     end
   end
-
 end
