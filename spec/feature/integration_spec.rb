@@ -65,7 +65,7 @@ RSpec.describe('Creating a Member', type: :feature) do
     expect(page).to(have_content('test@tamu.edu'))
     expect(page).to(have_content('1234567890'))
     expect(page).to(have_content('Member'))
-    click_on 'Show'
+    click_on 'Edit'
     click_on 'Destroy'
     expect(page).to(have_content('Member was successfully destroyed'))
   end
