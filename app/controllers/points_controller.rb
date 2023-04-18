@@ -12,7 +12,7 @@ class PointsController < ApplicationController
     @points_count = Point.where(admin_id: @user_id).where.not(is_approved: nil).count
 
     @pending_points = Point.where(admin_id: @user_id, is_approved: nil)
-    
+
     @user_total_points = Point.where(admin_id: @user_id, is_approved: true).count
     @num_per_category = Point.joins(:point_category).group(:name).where(admin_id: @user_id, is_approved: true).count
   end
@@ -77,7 +77,7 @@ class PointsController < ApplicationController
   end
 
   def help
-    render "points/help/#{params[:first]}"
+    render("points/help/#{params[:first]}")
   end
 
   def delete_points
@@ -88,7 +88,7 @@ class PointsController < ApplicationController
     else
       flash[:notice] = 'Permission Denied.'
     end
-    redirect_to points_path
+    redirect_to(points_path)
   end
 
   private
@@ -101,5 +101,4 @@ class PointsController < ApplicationController
     def point_params
       params.require(:point).permit(:admin_id, :point_category_id, :is_approved, :photo, :description, :date_attended)
     end
-
 end

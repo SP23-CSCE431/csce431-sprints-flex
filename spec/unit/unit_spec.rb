@@ -453,10 +453,10 @@ RSpec.describe(BudgetRequest, type: :model) do
     subject.phone = 1.1
     expect(subject).not_to(be_valid)
 
-    subject.phone = 1122323323232323
+    subject.phone = 1_122_323_323_232_323
     expect(subject).not_to(be_valid)
 
-    subject.phone = 00000000
+    subject.phone = 0o0000000
     expect(subject).not_to(be_valid)
 
     subject.phone = '9999999'
