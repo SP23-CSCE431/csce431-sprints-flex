@@ -3,41 +3,59 @@ class AdminsController < ApplicationController
 
   # GET /admins or /admins.json
   def index
+    if current_admin.role == "Member"
+      redirect_to(points_path)
+    end
     @admins = Admin.all
   end
 
   # GET /admins/1 or /admins/1.json
   def show
+    if current_admin.role == "Member"
+      redirect_to(points_path)
+    end
     set_admin
   end
 
   # GET /admins/new
   def new
+    if current_admin.role == "Member"
+      redirect_to(points_path)
+    end
     @admin = Admin.new
   end
 
   # GET /admins/1/edit
   def edit
+    if current_admin.role == "Member"
+      redirect_to(points_path)
+    end
     set_admin
   end
 
   # POST /admins or /admins.json
   def create
+    if current_admin.role == "Member"
+      redirect_to(points_path)
+    end
     @admin = Admin.new(admin_params)
 
-      respond_to do |format|
-        if @admin.save
-          format.html { redirect_to(admin_url(@admin), notice: "Member was successfully created.") }
-            format.json { render(:show, status: :created, location: @admin) }
-        else
-          format.html { render(:new, status: :unprocessable_entity) }
-            format.json { render(json: @admin.errors, status: :unprocessable_entity) }
-        end
+    respond_to do |format|
+      if @admin.save
+        format.html { redirect_to(admin_url(@admin), notice: "Member was successfully created.") }
+          format.json { render(:show, status: :created, location: @admin) }
+      else
+        format.html { render(:new, status: :unprocessable_entity) }
+          format.json { render(json: @admin.errors, status: :unprocessable_entity) }
       end
+    end
   end
 
   # PATCH/PUT /admins/1 or /admins/1.json
   def update
+    if current_admin.role == "Member"
+      redirect_to(points_path)
+    end
     set_admin
       respond_to do |format|
         if @admin.update(admin_params)
@@ -52,6 +70,9 @@ class AdminsController < ApplicationController
 
   # DELETE /admins/1 or /admins/1.json
   def destroy
+    if current_admin.role == "Member"
+      redirect_to(points_path)
+    end
     set_admin
       @admin.destroy
 
