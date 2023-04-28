@@ -40,15 +40,15 @@ class AdminsController < ApplicationController
     end
     @admin = Admin.new(admin_params)
 
-      respond_to do |format|
-        if @admin.save
-          format.html { redirect_to(admin_url(@admin), notice: "Member was successfully created.") }
-            format.json { render(:show, status: :created, location: @admin) }
-        else
-          format.html { render(:new, status: :unprocessable_entity) }
-            format.json { render(json: @admin.errors, status: :unprocessable_entity) }
-        end
+    respond_to do |format|
+      if @admin.save
+        format.html { redirect_to(admin_url(@admin), notice: "Member was successfully created.") }
+          format.json { render(:show, status: :created, location: @admin) }
+      else
+        format.html { render(:new, status: :unprocessable_entity) }
+          format.json { render(json: @admin.errors, status: :unprocessable_entity) }
       end
+    end
   end
 
   # PATCH/PUT /admins/1 or /admins/1.json
